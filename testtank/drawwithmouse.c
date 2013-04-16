@@ -9,6 +9,15 @@ typedef enum {
 	DOWN
 };
 
+struct round{
+	int x,y;
+	int dx,dy;
+	int action;
+	int speed;
+} big;
+
+int dx[4]={-1,0,1,0},dy[4]={0,1,0,-1};
+
 void drawWhenClick(int x,int y,int button,int event)
 {
 	if (event!=5) return;
@@ -64,37 +73,61 @@ void testkeyvalue(int key,int event)
 
 void movePoint(int key,int event)
 {
-	static int x,y;
 	int dir;
-	int dx[4]={-1,0,1,0},dy[4]={0,1,0,-1};
-	const int delta=5;
-	if (!x&&!y) x=getWidth()/2,y=getHeight()/2;
-	if (!event&&key>=LEFT&&key<=DOWN)
-	{
+	if (key<LEFT||key>DOWN) return;
+	if (event==KEY_DOWN){
 		dir=key-LEFT;
-		beginPaint();
-		clearDevice();
-		setPenWidth(100);
-		/*ux=x+delta*dx[dir];
-		uy=y+delta*dy[dir];*/
-		line(x,y,x,y);
-		x=x+delta*dx[dir];
-		y=y-delta*dy[dir];
-		setPenWidth(1);
-		endPaint();
+		big.x+=big.speed*dx[dir];
+		big.y+=big.speed*dy[dir];
+		big.dx=dx[dir];
+		big.dy=dy[dir];
+		big.action=1;
+	} 
+	else big.action=0;
+}
+
+void printPoint(int x,int y)
+{
+	int leftx,lefty,rightx,righty;
+	leftx=x-20;
+	lefty=y-20;
+	rightx=x+20;
+	righty=y+20;
+	beginPaint();
+	setBrushColor(EMPTY);
+	rectangle(leftx,lefty,rightx,righty);
+	endPaint();
+}
+void paintBlock(int id)
+{
+	beginPaint();
+	clearDevice();
+	endPaint();
+	if (big.action)
+	{
+		big.x+=big.speed*big.dx;
+		big.y+=big.speed*big.dy;
+		printPoint(big.x,big.y);
+	} 
+	else
+	{
+		printPoint(big.x,big.y);
 	}
 }
 
-//
-//int Main()
-//{
-//	initWindow("Move Tank",DEFAULT,DEFAULT,800,600);
-//	beginPaint();
-//	setTextSize(100);
-//	paintText(200,300,"This is a test of moving a tank");
-//	endPaint();
-//	registerMouseEvent(draw1);
-//	registerKeyboardEvent(movePoint);
-//
-//	return 0;
-//}
+int Main()
+{
+	initWindow("Move Tank",DEFAULT,DEFAULT,800,600);
+	beginPaint();
+	//setTextSize(100);
+	paintText(200,300,"This is a test of moving a tank");
+	endPaint();
+	big.x=getWidth()/2;
+	big.y=getHeight()/2;
+	registerTimerEvent(paintBlock);
+	startTimer(0,100);
+	//registerMouseEvent(draw1);
+	registerKeyboardEvent(movePoint);
+
+	return 0;
+}
