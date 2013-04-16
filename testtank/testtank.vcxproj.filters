@@ -21,8 +21,8 @@
     <ClCompile Include="acllib.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="drawwithmouse.c">
-      <Filter>测试中</Filter>
+    <ClCompile Include="ver1.c">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

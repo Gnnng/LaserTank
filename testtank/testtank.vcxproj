@@ -81,7 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="acllib.c" />
-    <ClCompile Include="drawwithmouse.c" />
+    <ClCompile Include="ver1.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h" />

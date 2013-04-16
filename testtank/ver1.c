@@ -61,25 +61,27 @@ int laserCount;
 static int counter=0;
 int dx[]={-1,0,1,0};
 int dy[]={0,-1,0,1};
-//
-//void printTank(nodeClass *);
-//void printLaser(nodeClass *);
-//void printMap(int );
-//
-//int insertTank(tankClass );
-//int changeTank(tankClass ,tankClass );
-//int cancelTank(tankClass );
-//
-//void controlTank(int ,int );
-//
-//void initMap(void);
-//void initTank(void);
+int mousex,mousey;
+
+void printTank(nodeClass *);
+void printLaser(nodeClass *);
+void printMap(int );
+
+int insertTank(tankClass );
+int changeTank(tankClass ,tankClass );
+int cancelTank(tankClass );
+
+void controlTank(int ,int );
+
+void initMap(void);
+void initTank(void);
+void updateTube(int,int);
 
 void printTank(nodeClass *node)
 {
 	int leftx,lefty,rightx,righty;
 	tankClass tank=allTank[node->id];
-
+	updateTube(mousex,mousey);
 	leftx=tank.x-tank.width/2;
 	lefty=tank.y-tank.width/2;
 	rightx=tank.x+tank.width/2;
@@ -92,6 +94,18 @@ void printTank(nodeClass *node)
 	line(tank.x,tank.y,tank.x+(int)(tank.len*cos(tank.angle)),tank.y+(int)(tank.len*sin(tank.angle)));
 	setPenWidth(1);
 	endPaint();
+}
+
+void updateTube(int x,int y)
+{
+	
+	tankClass *tank=&allTank[1];
+	double a,b,theta;
+	a=-(tank->y-y);
+	b=-(tank->x-x);
+	if (b==0)  theta=(a/fabs(a))*Pi/2; else theta=a/b;
+	tank->angle=atan(theta);
+	if (b<0) tank->angle+=Pi;
 }
 
 void printLaser(nodeClass *node)
@@ -140,18 +154,40 @@ void printMap(int tid)
 void controlTank(int key,int event)
 {
 	tankClass tank1,tank2;
+	char s[100];
+
 	tank1=tank2=allTank[1];
+	sprintf(s,"Key -> %d",key);
+	beginPaint();
+	paintText(700,500,s);
+	endPaint();
+	switch(key)
+	{
+	case 87:key=UP;break;
+	case 65:key=LEFT;break;
+	case 83:key=DOWN;break;
+	case 68:key=RIGHT;break;
+	}
 	switch(event){
 	case KEY_DOWN:
 		tank2.x+=tank2.speed*dx[key-LEFT];
 		tank2.y+=tank2.speed*dy[key-LEFT];
+		beginPaint();
+		sprintf(s,"x->%d,y->%d",tank2.x,tank2.y);
+		paintText(700,100,s);
+		endPaint();
+		tank2.action=1;
 		break;
 	case KEY_UP:
+		tank2.action=0;
 		break;
 	}
 	changeTank(tank1,tank2);
 }
-
+void updateMouse(int x,int y,int button,int event){
+	mousex=x;
+	mousey=y;
+}
 void initTank(void)
 {
 	tankClass *tank;
@@ -175,7 +211,6 @@ void initMap(void)
 	insertTank(allTank[1]);
 }
 
-
 int insertTank(tankClass tank)
 {
 	int leftx,lefty,rightx,righty;
@@ -184,15 +219,16 @@ int insertTank(tankClass tank)
 	lefty=tank.y-tank.width/2;
 	rightx=tank.x+tank.width/2;
 	righty=tank.y+tank.width/2;
-	//for(i=leftx;i<=rightx;i++)
-	//	for(j=lefty;j<=righty;j++)
-	//		if (map[i][j].obj!=NOPE) 
-	//		{
-	//				/*flag=1;*/
-	//				return 0;
-	//		}
+	for(i=leftx;i<=rightx;i++)
+		for(j=lefty;j<=righty;j++)
+			if (map[i][j].obj!=NOPE) 
+			{
+					/*flag=1;*/
+					return 0;
+			}
 	map[tank.x][tank.y].obj=TANK;
 	map[tank.x][tank.y].id=tank.id;
+	allTank[tank.id]=tank;
 	return 1;
 }
 
@@ -208,14 +244,22 @@ int changeTank(tankClass tank1,tankClass tank2){
 	return ret;
 }
 
-//int Main()
-//{
-//	initWindow("LaserTank",DEFAULT,DEFAULT,WINX,WINY);
-//	//Menu
-//	//
-//	initMap();
-//	startTimer(0,100);
-//	registerKeyboardEvent(controlTank);
-//	registerTimerEvent(printMap);
-//	return 0;
-//}
+void updateTubeSB(int id)
+{
+	updateTube(mousex,mousey);
+}
+
+int Main()
+{
+	initWindow("LaserTank",DEFAULT,DEFAULT,WINX,WINY);
+	//Menu
+	//
+	initMap();
+	registerTimerEvent(printMap);
+	startTimer(0,50);
+	//registerTimerEvent(updateTubeSB);
+	//startTimer(1,50);
+	registerKeyboardEvent(controlTank);
+	registerMouseEvent(updateMouse);
+	return 0;
+}
