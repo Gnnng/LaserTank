@@ -4,7 +4,7 @@
 #include<stdio.h>
 
 /*
-
+张宇昊到此一游
 */
 #define WINX 800
 #define WINY 600
