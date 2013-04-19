@@ -85,6 +85,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h" />
+    <ClInclude Include="Laser.h" />
+    <ClInclude Include="print.h" />
+    <ClInclude Include="set.h" />
+    <ClInclude Include="tank.h" />
+    <ClInclude Include="update.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

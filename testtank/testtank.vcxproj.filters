@@ -29,5 +29,20 @@
     <ClInclude Include="acllib.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="set.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tank.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="print.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="update.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
