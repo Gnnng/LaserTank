@@ -45,49 +45,73 @@ void initLaser(int x0,int y0,double xt,double yt,int speed)
 
 void insertLaser(laserClass	laser)
 {
-	int i,j,k;
-	int x,y;
+	int i,p,q;
+	int flag;
+	int x,y,fx,fy,tx,ty,x1,x2,y1,y2;
+	fx=laser.x0;fy=laser.y0;
 	for (i=0;i<=laser.len;i++)
 	{
-		x=laser.x0+i*laser.xt;
-		y=laser.y0+i*laser.yt;
-		if (0/*碰撞等情况*/)
+		tx=laser.x0+i*laser.xt;
+		ty=laser.y0+i*laser.yt;
+		flag=0;
+		for (x=fx;x!=tx;)
 		{
-		}
-		else
-		{
-			if(map[x][y].obj==WALL || x>=WINX || y>=WINY || x<=0 || y<=0)
+			for(y=fy;y!=ty;)
 			{
-				laser.t=0;
+				//if(x>=WINX || y>=WINY || x<=0 || y<=0 || map[x][y].obj==WALL)
+				if (map[x][y].obj==WALL)
+				{
+					char s[100];
+					//beginPaint();
+					laser.t=0;
+					flag=1;
+					break;
+				}
+				if (map[x][y].obj!=TANK)
+				{
+					map[x][y].obj=LASER;
+					map[x][y].id=laser.id;
+				}	
+				if (ty>fy) y++; else y--;
+			}
+			if (flag)
+			{
 				break;
 			}
-			if (map[x][y].obj!=TANK)
-			{
-				map[x][y].obj=LASER;
-				map[x][y].id=laser.id;
-			}				
+			if (tx>fx) x++; else x--;
 		}
+		if (flag)
+		{
+			break;
+		}
+		fx=tx;
+		fy=ty;
 	}
 	allLaser[laser.id]=laser;
 }
 void cancelLaser(laserClass laser)
 {
 	int i,j,k;
-	int x,y;
+	int x,y,tx,fx,ty,fy;
+	fx=laser.x0;fy=laser.y0;
 	for (i=0;i<=laser.len;i++)
 	{
-		x=laser.x0+i*laser.xt;
-		y=laser.y0+i*laser.yt;
-		if (0/*碰撞等情况*/)
+		tx=laser.x0+i*laser.xt;
+		ty=laser.y0+i*laser.yt;
+		for (x=fx;x!=tx;)
 		{
-		}
-		else
-		{
-			if (map[x][y].obj==LASER)
+			for(y=fy;y!=ty;)
 			{
-				map[x][y].obj=NOPE;
+				if (map[x][y].obj==LASER)
+				{
+					map[x][y].obj=NOPE;
+				}	
+				if (ty>fy) y++; else y--;
 			}
+			if (tx>fx) x++; else x--;
 		}
+		fx=tx;
+		fy=ty;
 	}
 }
 void changeLaser(laserClass laser1,laserClass laser2)
