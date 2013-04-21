@@ -45,7 +45,7 @@ int Main()
 	//
 	initMap();
 	registerTimerEvent(printMap);
-	startTimer(0,50);
+	startTimer(0,10);
 	//registerTimerEvent(updateTubeSB);
 	//startTimer(1,50);
 	registerKeyboardEvent(controlTank);
