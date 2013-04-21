@@ -42,9 +42,14 @@ void printCount(void)
 void printMap(int tid)
 {
 	int i,j;
+	static int cc;
 	timeupdate();
 	beginPaint();
-	clearDevice();
+	cc++;
+	if (cc==15){
+		clearDevice();
+		cc=0;
+	}
 	endPaint();
 	printCount();
 

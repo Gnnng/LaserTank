@@ -26,5 +26,12 @@ void updateMouse(int x,int y,int button,int event){
 		initLaser(x0,y0,(double)(x-x0)/len,(double)(y-y0)/len,LASERSPEED);
 		insertLaser(allLaser[laserCount]);
 	}
+	if (event==BUTTON_DOWN && button==RIGHT_BUTTON)
+	{
+		beginPaint();
+		sprintf(s,"x0=%d,y0=%d",allLaser[map[x][y].id].x0,allLaser[map[x][y].id].y0);
+		paintText(500,300,s);
+		endPaint();
+	}
 
 }

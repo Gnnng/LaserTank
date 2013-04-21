@@ -16,7 +16,7 @@ void updateLaser()
 		}
 		else
 		{
-			if (allLaser[i].t==0)
+			if (allLaser[i].t<=0 && allLaser[i].t>=-1)
 			{
 				cancelLaser(allLaser[i]);
 				allLaser[i].t--;
@@ -94,15 +94,21 @@ void cancelLaser(laserClass laser)
 {
 	int i,j,k;
 	int x,y,tx,fx,ty,fy;
+	int flag;
 	fx=laser.x0;fy=laser.y0;
 	for (i=0;i<=laser.len;i++)
 	{
 		tx=laser.x0+i*laser.xt;
 		ty=laser.y0+i*laser.yt;
+		flag=0;
 		for (x=fx;x!=tx;)
 		{
 			for(y=fy;y!=ty;)
 			{
+				if (map[x][y].obj==WALL)
+				{
+					flag=1;
+				}
 				if (map[x][y].obj==LASER)
 				{
 					map[x][y].obj=NOPE;
@@ -110,6 +116,10 @@ void cancelLaser(laserClass laser)
 				if (ty>fy) y++; else y--;
 			}
 			if (tx>fx) x++; else x--;
+		}
+		if (flag)
+		{
+			break;
 		}
 		fx=tx;
 		fy=ty;
