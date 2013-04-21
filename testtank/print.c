@@ -42,20 +42,17 @@ void printCount(void)
 void printMap(int tid)
 {
 	int i,j;
-<<<<<<< HEAD
 	static int cc;
 	timeupdate();
 	beginPaint();
 	cc++;
 	if (cc==15){
-=======
 	static int cc=0;
 	cc++;
 	timeupdate();
 	beginPaint();
 	if (cc==15)
 	{
->>>>>>> origin/Zhang
 		clearDevice();
 		cc=0;
 	}
