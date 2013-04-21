@@ -24,25 +24,43 @@
     <ClCompile Include="ver1.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="print.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tank.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Laser.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="updata.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Laser.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="set.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="tank.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="head.h">
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="print.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="set.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tank.h">
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="update.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extern.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

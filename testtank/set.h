@@ -1,7 +1,22 @@
+#ifndef ACLIB_H
+#define ACLIB_H
 #include "acllib.h"
+#endif
+
+#ifndef STRING_H
+#define STRING_H
 #include<string.h>
+#endif
+
+#ifndef MATH_H
+#define MATH_H
 #include<math.h>
+#endif
+
+#ifndef STDIO_H
+#define STDIO_H
 #include<stdio.h>
+#endif
 
 #define WINX 800
 #define WINY 600
@@ -56,33 +71,6 @@ typedef struct _nodeClass{
 	int id;
 } nodeClass;
 
-nodeClass map[WINX+1][WINY+1];
-tankClass allTank[MAXTANK];
-int tankCount;
-laserClass allLaser[MAXLASER];
-int laserCount;
-static int counter=0;
-int dx[]={-1,0,1,0};
-int dy[]={0,-1,0,1};
-int mousex,mousey;
 
-void printTank(nodeClass *);
-void printLaser(nodeClass *);
-void printMap(int );
 
-int insertTank(tankClass );
-int changeTank(tankClass ,tankClass );
-int cancelTank(tankClass );
 
-void controlTank(int ,int );
-
-void initMap(void);
-void initTank(void);
-void updateTube(int,int,int);
-void timeupdate();
-
-void insertLaser(laserClass);
-void initLaser(int,int,double,double,int);
-void cancelLaser(laserClass);
-void changeLaser(laserClass,laserClass);
-void updateLaser();

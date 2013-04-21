@@ -1,12 +1,19 @@
-
-#include "set.h"
-#include "Laser.h"
-#include "tank.h"
-#include "print.h"
-#include "update.h"
+#ifndef HEAD_H
+#define HEAD_H
+#include "head.h"
+#endif
 /*
 张宇昊到此一游
 */
+nodeClass map[WINX+1][WINY+1];
+tankClass allTank[MAXTANK];
+int tankCount;
+laserClass allLaser[MAXLASER];
+int laserCount;
+int counter=0;
+int dx[]={-1,0,1,0};
+int dy[]={0,-1,0,1};
+int mousex,mousey;
 void initMap(void)
 {
 	int i,j;
