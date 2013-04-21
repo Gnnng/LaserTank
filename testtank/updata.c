@@ -1,11 +1,6 @@
-#ifndef HEAD_H
-#define HEAD_H
 #include "head.h"
-#endif
-#ifndef EXTERN_H
-#define EXTERN_H
 #include "extern.h"
-#endif
+
 void timeupdate()
 {
 	updateTube(1,mousex,mousey);

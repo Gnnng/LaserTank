@@ -1,7 +1,9 @@
-#ifndef HEAD_H
-#define HEAD_H
+#ifndef LASER_H
+#define LASER_H
+
+
 #include "head.h"
-#endif
+
 
 void insertLaser(laserClass);
 
@@ -12,3 +14,4 @@ void cancelLaser(laserClass);
 void changeLaser(laserClass,laserClass);
 
 void updateLaser();
+#endif
