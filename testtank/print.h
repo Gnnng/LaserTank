@@ -1,10 +1,12 @@
-#ifndef HEAD_H
-#define HEAD_H
+#ifndef PRINT_H
+#define PRINT_H
+
 #include "head.h"
-#endif
 
 void printTank(nodeClass *);
 
 void printLaser(nodeClass *);
 
 void printMap(int );
+
+#endif

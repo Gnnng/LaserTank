@@ -1,22 +1,11 @@
-#ifndef ACLIB_H
-#define ACLIB_H
+#ifndef SET_H
+#define SET_H
+
 #include "acllib.h"
-#endif
-
-#ifndef STRING_H
-#define STRING_H
 #include<string.h>
-#endif
-
-#ifndef MATH_H
-#define MATH_H
 #include<math.h>
-#endif
-
-#ifndef STDIO_H
-#define STDIO_H
 #include<stdio.h>
-#endif
+
 
 #define WINX 800
 #define WINY 600
@@ -72,5 +61,5 @@ typedef struct _nodeClass{
 } nodeClass;
 
 
-
+#endif
 
