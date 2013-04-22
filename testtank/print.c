@@ -46,11 +46,6 @@ void printMap(int tid)
 	timeupdate();
 	beginPaint();
 	cc++;
-	if (cc==15){
-	static int cc=0;
-	cc++;
-	timeupdate();
-	beginPaint();
 	if (cc==15)
 	{
 		clearDevice();

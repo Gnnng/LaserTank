@@ -30,10 +30,10 @@
     <ClCompile Include="tank.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Laser.c">
+    <ClCompile Include="update.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="updata.c">
+    <ClCompile Include="laser.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,9 +50,6 @@
     <ClInclude Include="set.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Laser.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="tank.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -60,6 +57,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="extern.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="laser.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

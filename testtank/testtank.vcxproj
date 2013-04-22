@@ -81,17 +81,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="acllib.c" />
-    <ClCompile Include="Laser.c" />
+    <ClCompile Include="laser.c" />
     <ClCompile Include="print.c" />
     <ClCompile Include="tank.c" />
-    <ClCompile Include="updata.c" />
+    <ClCompile Include="update.c" />
     <ClCompile Include="ver1.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h" />
     <ClInclude Include="extern.h" />
     <ClInclude Include="head.h" />
-    <ClInclude Include="Laser.h" />
+    <ClInclude Include="laser.h" />
     <ClInclude Include="print.h" />
     <ClInclude Include="set.h" />
     <ClInclude Include="tank.h" />
