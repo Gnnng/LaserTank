@@ -86,6 +86,7 @@
     <ClCompile Include="tank.c" />
     <ClCompile Include="update.c" />
     <ClCompile Include="ver1.c" />
+    <ClCompile Include="watch.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="set.h" />
     <ClInclude Include="tank.h" />
     <ClInclude Include="update.h" />
+    <ClInclude Include="watch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,7 @@
 #include "head.h"
 #include "extern.h"
+#include "watch.h"
+
 void updateTube(int i,int x,int y)
 {
 	
@@ -19,10 +21,11 @@ void controlTank(int key,int event)
 	char s[100];
 
 	tank1=tank2=allTank[1];
-	sprintf(s,"Key -> %d",key);
+	watch("Key ->",key);
+	/*sprintf(s,"Key -> %d",key);
 	beginPaint();
 	paintText(700,500,s);
-	endPaint();
+	endPaint();*/
 	switch(key)
 	{
 	case 87:key=UP;break;
@@ -34,10 +37,12 @@ void controlTank(int key,int event)
 	case KEY_DOWN:
 		tank2.x+=tank2.speed*dx[key-LEFT];
 		tank2.y+=tank2.speed*dy[key-LEFT];
-		beginPaint();
+		watch("tank x ->",tank2.x);
+		watch("tank y ->",tank2.y);
+		/*beginPaint();
 		sprintf(s,"x->%d,y->%d",tank2.x,tank2.y);
 		paintText(700,100,s);
-		endPaint();
+		endPaint();*/
 		tank2.action=1;
 		break;
 	case KEY_UP:

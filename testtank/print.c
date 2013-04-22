@@ -1,5 +1,6 @@
 #include "head.h"
 #include "extern.h"
+#include "watch.h"
 
 void printTank(nodeClass *node)
 {
@@ -32,12 +33,13 @@ void printLaser(int i)
 void printCount(void)
 {
 	char s[100];
-	beginPaint();
+	watch("Counter ->",counter);
+	/*beginPaint();
 	setTextSize(10);
 	setTextColor(BLACK);
 	sprintf(s,"Counter -> %d",counter);
 	paintText(100,100,s);
-	endPaint();
+	endPaint();*/
 }
 void printMap(int tid)
 {
