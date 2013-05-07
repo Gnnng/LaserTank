@@ -1,6 +1,16 @@
-#include "head.h"
-#include "extern.h"
+#include "acllib.h"
+#include "tank.h"
+#include "laser.h"
 #include "watch.h"
+#include "update.h"
+#include "map.h"
+#include <math.h>
+
+nodeClass map[WINX+1][WINY+1];
+int counter=0;
+
+int dx[]={-1,0,1,0};
+int dy[]={0,-1,0,1};
 
 void printTank(nodeClass *node)
 {
@@ -19,9 +29,6 @@ void printTank(nodeClass *node)
 	setPenWidth(1);
 	endPaint();
 }
-
-
-
 void printLaser(int i)
 {
 	beginPaint();
@@ -29,7 +36,6 @@ void printLaser(int i)
 	endPaint();
 
 }
-
 void printCount(void)
 {
 	char s[100];
@@ -45,7 +51,7 @@ void printMap(int tid)
 {
 	int i,j;
 	static int cc;
-	timeupdate();
+	updateWithMap();
 	beginPaint();
 	cc++;
 	if (cc==15)
@@ -74,4 +80,23 @@ void printMap(int tid)
 	{
 		cancelTimer(0);
 	}
+}
+
+void initMap()
+{
+	int i,j;
+	for (i=0;i<=WINX;i++)
+	{
+		map[i][0].obj=WALL;
+		map[i][WINY].obj=WALL;
+	}
+	for (j=0;j<=WINY;j++)
+	{
+		map[0][j].obj=WALL;
+		map[WINX][j].obj=WALL;
+	}
+	tankCount=0;
+	initTank();
+	insertTank(allTank[1]);
+	laserCount=0;
 }

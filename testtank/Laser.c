@@ -1,16 +1,23 @@
-#include "head.h"
-#include "extern.h"
+#include "acllib.h"
+#include "laser.h"
+#include "tank.h"
+#include <math.h>
+#include "map.h"
+
+laserClass allLaser[MAXLASER];
+int laserCount;
+
 void updateLaser()
 {
-	int i,j;
+	int i;
 	laserClass laser2;
 	for (i=1;i<=laserCount;i++)
 	{
 		if (allLaser[i].t>0)		
 		{
 			laser2=allLaser[i];
-			laser2.x0=laser2.fx0+(LASERT-laser2.t)*laser2.xt;
-			laser2.y0=laser2.fy0+(LASERT-laser2.t)*laser2.yt;
+			laser2.x0=(int)(laser2.fx0+(LASERT-laser2.t)*laser2.xt);
+			laser2.y0=(int)(laser2.fy0+(LASERT-laser2.t)*laser2.yt);
 			changeLaser(allLaser[i],laser2);
 			allLaser[i].t--;
 		}
@@ -24,6 +31,7 @@ void updateLaser()
 		}
 	}		
 }
+
 void initLaser(int x0,int y0,double xt,double yt,int speed)
 {
 	laserClass	*laser;
@@ -40,15 +48,15 @@ void initLaser(int x0,int y0,double xt,double yt,int speed)
 	laser->yt=yt;
 	//laser->yt=0;
 	laser->t=LASERT;
-	laser->len=LASERLEN/sqrt(xt*xt+yt*yt);
+	laser->len=(int)(LASERLEN/sqrt(xt*xt+yt*yt));
 	laser->id=laserCount;
 }
 
 void insertLaser(laserClass	laser)
 {
-	int i,p,q;
+	int i;
 	int flag;
-	int x,y,fx,fy,tx,ty,x1,x2,y1,y2;
+	int x,y,fx,fy,tx,ty;
 	fx=laser.x0;fy=laser.y0;
 	for (i=0;i<=laser.len;i++)
 	{
@@ -92,7 +100,7 @@ void insertLaser(laserClass	laser)
 }
 void cancelLaser(laserClass laser)
 {
-	int i,j,k;
+	int i;
 	int x,y,tx,fx,ty,fy;
 	int flag;
 	fx=laser.x0;fy=laser.y0;

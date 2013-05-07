@@ -21,12 +21,6 @@
     <ClCompile Include="acllib.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ver1.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="print.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="tank.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -39,18 +33,15 @@
     <ClCompile Include="watch.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="map.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="head.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="print.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="set.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="tank.h">
@@ -59,13 +50,13 @@
     <ClInclude Include="update.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extern.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="laser.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="watch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

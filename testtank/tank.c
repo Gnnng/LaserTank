@@ -1,55 +1,24 @@
-#include "head.h"
-#include "extern.h"
+#include "tank.h"
+#include "laser.h"
+#include <math.h>
+#include "acllib.h"
 #include "watch.h"
+#include "update.h"
+#include "map.h"
 
-void updateTube(int i,int x,int y)
+tankClass allTank[MAXTANK];
+int tankCount;
+
+void controlTube(int i,int x,int y)
 {
-	
-	tankClass tank=allTank[i];
+	tankClass tank=allTank[1];
 	double a,b,theta;
 	a=-(tank.y-y);
 	b=-(tank.x-x);
 	if (b==0)  theta=(a/fabs(a))*Pi/2; else theta=a/b;
 	tank.angle=atan(theta);
 	if (b<0) tank.angle+=Pi;
-	allTank[i]=tank;
-}
-
-void controlTank(int key,int event)
-{
-	tankClass tank1,tank2;
-	char s[100];
-
-	tank1=tank2=allTank[1];
-	watch("Key ->",key);
-	/*sprintf(s,"Key -> %d",key);
-	beginPaint();
-	paintText(700,500,s);
-	endPaint();*/
-	switch(key)
-	{
-	case 87:key=UP;break;
-	case 65:key=LEFT;break;
-	case 83:key=DOWN;break;
-	case 68:key=RIGHT;break;
-	}
-	switch(event){
-	case KEY_DOWN:
-		tank2.x+=tank2.speed*dx[key-LEFT];
-		tank2.y+=tank2.speed*dy[key-LEFT];
-		watch("tank x ->",tank2.x);
-		watch("tank y ->",tank2.y);
-		/*beginPaint();
-		sprintf(s,"x->%d,y->%d",tank2.x,tank2.y);
-		paintText(700,100,s);
-		endPaint();*/
-		tank2.action=1;
-		break;
-	case KEY_UP:
-		tank2.action=0;
-		break;
-	}
-	changeTank(tank1,tank2);
+	allTank[1]=tank;
 }
 
 void initTank(void)

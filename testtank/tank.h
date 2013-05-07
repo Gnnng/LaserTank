@@ -1,7 +1,24 @@
 #ifndef TANK_H
 #define TANK_H
 
-#include "head.h"
+#define MAXTANK 10
+
+
+extern int tankCount;
+
+typedef struct _tankClass{
+	int x,y;// position
+	int dx,dy;// direction
+	int speed;
+	double angle;// Laser gun's angle
+	int len;//laser gun's length
+	int width;
+	int radius;
+	int id;
+	int action;
+} tankClass;
+
+extern tankClass allTank[MAXTANK];
 
 void controlTank(int ,int );
 
@@ -11,7 +28,7 @@ int changeTank(tankClass,tankClass);
 
 int cancelTank(tankClass );
 
-void updateTube(int,int,int);
+void controlTube(int,int,int);
 
 void initTank(void);
 

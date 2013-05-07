@@ -1,17 +1,21 @@
-#include "head.h"
-#include "extern.h"
+#include "acllib.h"
 #include "watch.h"
+#include "laser.h"
+#include "tank.h"
+#include <math.h>
+#include "update.h"
+#include "map.h"
 
-void timeupdate()
+int mousex,mousey;
+
+void updateWithMap()
 {
-	updateTube(1,mousex,mousey);
+	controlTube(1,mousex,mousey);
 	updateLaser();
 }
 
-
 void updateMouse(int x,int y,int button,int event){
 	int x0,y0;
-	char s[100];
 	double len;
 	mousex=x;
 	mousey=y;
@@ -37,4 +41,41 @@ void updateMouse(int x,int y,int button,int event){
 		endPaint();*/
 	}
 
+}
+
+void updateKey(int key,int event)
+{
+	tankClass tank1,tank2;
+	char s[100];
+
+	tank1=tank2=allTank[1];
+	watch("Key ->",key);
+	/*sprintf(s,"Key -> %d",key);
+	beginPaint();
+	paintText(700,500,s);
+	endPaint();*/
+	switch(key)
+	{
+	case 87:key=UP;break;
+	case 65:key=LEFT;break;
+	case 83:key=DOWN;break;
+	case 68:key=RIGHT;break;
+	}
+	switch(event){
+	case KEY_DOWN:
+		tank2.x+=tank2.speed*dx[key-LEFT];
+		tank2.y+=tank2.speed*dy[key-LEFT];
+		watch("tank x ->",tank2.x);
+		watch("tank y ->",tank2.y);
+		/*beginPaint();
+		sprintf(s,"x->%d,y->%d",tank2.x,tank2.y);
+		paintText(700,100,s);
+		endPaint();*/
+		tank2.action=1;
+		break;
+	case KEY_UP:
+		tank2.action=0;
+		break;
+	}
+	changeTank(tank1,tank2);
 }

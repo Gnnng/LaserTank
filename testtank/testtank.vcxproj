@@ -82,19 +82,16 @@
   <ItemGroup>
     <ClCompile Include="acllib.c" />
     <ClCompile Include="laser.c" />
-    <ClCompile Include="print.c" />
+    <ClCompile Include="map.c" />
     <ClCompile Include="tank.c" />
     <ClCompile Include="update.c" />
-    <ClCompile Include="ver1.c" />
+    <ClCompile Include="main.c" />
     <ClCompile Include="watch.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h" />
-    <ClInclude Include="extern.h" />
-    <ClInclude Include="head.h" />
     <ClInclude Include="laser.h" />
-    <ClInclude Include="print.h" />
-    <ClInclude Include="set.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="tank.h" />
     <ClInclude Include="update.h" />
     <ClInclude Include="watch.h" />
