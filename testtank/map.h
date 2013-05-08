@@ -3,7 +3,7 @@
 
 #define WINX 800
 #define WINY 600
-#define MAXEXISTTIME 5
+#define MAXEXISTTIME 500
 #define Pi 3.1415926
 
 typedef enum{
@@ -22,16 +22,18 @@ typedef struct _nodeClass{
 } nodeClass;
 
 extern nodeClass map[WINX+1][WINY+1];
-
 extern int counter;
 extern int dx[];
 extern int dy[];
 
-void initMap();
+//already done
 void printTank(nodeClass *);
-
-void printLaser(nodeClass *);
-
+void printLaser(int i);
 void printMap(int );
 
+//remaing build
+void setWall(int fx,int fy,int tx,int ty);
+
+//remaing remove
+void initMap();
 #endif

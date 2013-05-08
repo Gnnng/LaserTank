@@ -36,32 +36,27 @@ void printLaser(int i)
 	endPaint();
 
 }
-void printCount(void)
-{
-	char s[100];
-	watch("Counter ->",counter);
-	/*beginPaint();
-	setTextSize(10);
-	setTextColor(BLACK);
-	sprintf(s,"Counter -> %d",counter);
-	paintText(100,100,s);
-	endPaint();*/
-}
+
 void printMap(int tid)
 {
 	int i,j;
 	static int cc;
 	updateWithMap();
-	beginPaint();
+	beginPaint(); 
+#ifdef SHADOW
 	cc++;
 	if (cc==15)
 	{
-		clearDevice();
+#endif
+		//clearDevice();
+		setBrushColor(WHITE);
+		rectangle(0,0,WINX,WINY);
+#ifdef SHADOW
 		cc=0;
 	}
+#endif
 	endPaint();
-	printCount();
-
+	watch("Counter ->",counter);
 	for(i=0;i<WINX;i++)
 	{
 		for(j=0;j<WINY;j++)
@@ -71,7 +66,7 @@ void printMap(int tid)
 			case NOPE: break;
 			case WALL: break;
 			case TANK: printTank(&map[i][j]); break;
-			case LASER: if (allLaser[map[i][j].id].t>0) printLaser(map[i][j].id); break;
+			case LASER: if (allLaser[map[i][j].id].life>0) printLaser(map[i][j].id); break;
 			}
 		}
 	}
@@ -79,6 +74,17 @@ void printMap(int tid)
 	if (counter==MAXEXISTTIME*1000) 
 	{
 		cancelTimer(0);
+	}
+}
+
+void setWall(int fx,int fy,int tx,int ty){
+	if (fx==tx) {
+		for(;fy!=ty;fy<ty?fy++:fy--)
+			map[fx][fy].obj=WALL;
+	}
+	if (fy==ty) {
+		for(;fx!=tx;fx<tx?fx++:fx--)
+			map[fx][fy].obj=WALL;
 	}
 }
 
@@ -90,13 +96,14 @@ void initMap()
 		map[i][0].obj=WALL;
 		map[i][WINY].obj=WALL;
 	}
+	//setWall(0,400,WINX,400);
 	for (j=0;j<=WINY;j++)
 	{
 		map[0][j].obj=WALL;
 		map[WINX][j].obj=WALL;
 	}
 	tankCount=0;
+	laserCount=0;
 	initTank();
 	insertTank(allTank[1]);
-	laserCount=0;
 }

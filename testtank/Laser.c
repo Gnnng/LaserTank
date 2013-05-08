@@ -13,20 +13,20 @@ void updateLaser()
 	laserClass laser2;
 	for (i=1;i<=laserCount;i++)
 	{
-		if (allLaser[i].t>0)		
+		if (allLaser[i].life>0)		
 		{
 			laser2=allLaser[i];
-			laser2.x0=(int)(laser2.fx0+(LASERT-laser2.t)*laser2.xt);
-			laser2.y0=(int)(laser2.fy0+(LASERT-laser2.t)*laser2.yt);
+			laser2.x0=(int)(laser2.ox+(LASERLIFE-laser2.life)*laser2.xt);
+			laser2.y0=(int)(laser2.oy+(LASERLIFE-laser2.life)*laser2.yt);
 			changeLaser(allLaser[i],laser2);
-			allLaser[i].t--;
+			allLaser[i].life--;
 		}
 		else
 		{
-			if (allLaser[i].t<=0 && allLaser[i].t>=-1)
+			if (allLaser[i].life<=0 && allLaser[i].life>=-1)
 			{
 				cancelLaser(allLaser[i]);
-				allLaser[i].t--;
+				allLaser[i].life--;
 			}
 		}
 	}		
@@ -37,8 +37,8 @@ void initLaser(int x0,int y0,double xt,double yt,int speed)
 	laserClass	*laser;
 	laserCount++;
 	laser=&allLaser[laserCount];
-	laser->fx0=x0;
-	laser->fy0=y0;
+	laser->ox=x0;
+	laser->oy=y0;
 	laser->x0=x0;
 	laser->y0=y0;
 	xt=speed*xt;
@@ -47,7 +47,7 @@ void initLaser(int x0,int y0,double xt,double yt,int speed)
 	//laser->xt=0.5;
 	laser->yt=yt;
 	//laser->yt=0;
-	laser->t=LASERT;
+	laser->life=LASERLIFE;
 	laser->len=(int)(LASERLEN/sqrt(xt*xt+yt*yt));
 	laser->id=laserCount;
 }
@@ -60,19 +60,18 @@ void insertLaser(laserClass	laser)
 	fx=laser.x0;fy=laser.y0;
 	for (i=0;i<=laser.len;i++)
 	{
-		tx=laser.x0+i*laser.xt;
-		ty=laser.y0+i*laser.yt;
+		tx=laser.x0+i*laser.xt+1;//bug
+		ty=laser.y0+i*laser.yt+1;//bug
 		flag=0;
 		for (x=fx;x!=tx;)
 		{
 			for(y=fy;y!=ty;)
 			{
-				//if(x>=WINX || y>=WINY || x<=0 || y<=0 || map[x][y].obj==WALL)
-				if (map[x][y].obj==WALL)
+				if(x>WINX || y>WINY || x<0 || y<0 || map[x][y].obj==WALL)
+				//if (map[x][y].obj==WALL)	
 				{
-					char s[100];
 					//beginPaint();
-					laser.t=0;
+					laser.life=0;
 					flag=1;
 					break;
 				}
@@ -98,6 +97,7 @@ void insertLaser(laserClass	laser)
 	}
 	allLaser[laser.id]=laser;
 }
+
 void cancelLaser(laserClass laser)
 {
 	int i;
@@ -106,16 +106,18 @@ void cancelLaser(laserClass laser)
 	fx=laser.x0;fy=laser.y0;
 	for (i=0;i<=laser.len;i++)
 	{
-		tx=laser.x0+i*laser.xt;
-		ty=laser.y0+i*laser.yt;
+		tx=laser.x0+i*laser.xt+1;//bug
+		ty=laser.y0+i*laser.yt+1;//bug
 		flag=0;
 		for (x=fx;x!=tx;)
 		{
 			for(y=fy;y!=ty;)
 			{
-				if (map[x][y].obj==WALL)
+				if(x>WINX || y>WINY || x<0 || y<0 || map[x][y].obj==WALL)//copy from insertLaser
+				//if (map[x][y].obj==WALL)
 				{
 					flag=1;
+					break;
 				}
 				if (map[x][y].obj==LASER)
 				{
@@ -127,7 +129,7 @@ void cancelLaser(laserClass laser)
 		}
 		if (flag)
 		{
-			break;
+			break; 
 		}
 		fx=tx;
 		fy=ty;

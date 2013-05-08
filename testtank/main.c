@@ -1,10 +1,10 @@
 #include "acllib.h"
 #include "map.h"
 #include "update.h"
-
+ 
 int Main()
 {
-	initWindow("LaserTank",DEFAULT,DEFAULT,WINX,WINY);
+	initWindow("LASERLIFEank",DEFAULT,DEFAULT,WINX+200,WINY);
 	//binding the input
 	registerTimerEvent(printMap);
 	startTimer(0,10);

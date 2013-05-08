@@ -19,6 +19,8 @@ void updateMouse(int x,int y,int button,int event){
 	double len;
 	mousex=x;
 	mousey=y;
+	watch("Mouse x",x);
+	watch("Mouse y",y);
 	if (event==BUTTON_DOWN && button==LEFT_BUTTON)
 	{
 		x0=allTank[1].x;
@@ -41,19 +43,14 @@ void updateMouse(int x,int y,int button,int event){
 		endPaint();*/
 	}
 
-}
+}  
 
 void updateKey(int key,int event)
 {
 	tankClass tank1,tank2;
-	char s[100];
 
 	tank1=tank2=allTank[1];
 	watch("Key ->",key);
-	/*sprintf(s,"Key -> %d",key);
-	beginPaint();
-	paintText(700,500,s);
-	endPaint();*/
 	switch(key)
 	{
 	case 87:key=UP;break;
@@ -67,10 +64,6 @@ void updateKey(int key,int event)
 		tank2.y+=tank2.speed*dy[key-LEFT];
 		watch("tank x ->",tank2.x);
 		watch("tank y ->",tank2.y);
-		/*beginPaint();
-		sprintf(s,"x->%d,y->%d",tank2.x,tank2.y);
-		paintText(700,100,s);
-		endPaint();*/
 		tank2.action=1;
 		break;
 	case KEY_UP:

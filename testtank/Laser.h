@@ -3,15 +3,15 @@
 
 #define MAXLASER 100
 #define LASERLEN 100
-#define LASERT 30
+#define LASERLIFE 30
 #define LASERSPEED 15
 
 typedef struct _laserClass{
-	int fx0,fy0;
+	int ox,oy; //original coordinates
 	int x0,y0; //beginning position
 	int len;
 	double xt,yt; // direction of laser
-	int t; // time count after shoot
+	int life; // lifetime count after shooting
 	int id;
 } laserClass;
 

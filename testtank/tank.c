@@ -20,7 +20,7 @@ void controlTube(int i,int x,int y)
 	if (b<0) tank.angle+=Pi;
 	allTank[1]=tank;
 }
-
+  
 void initTank(void)
 {
 	tankClass *tank;

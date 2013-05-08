@@ -1,11 +1,11 @@
-#include "head.h"
-#include "extern.h"
 #include "watch.h"
-#include "string.h"
-
+#include "acllib.h"
+#include <string.h>
+#include <stdio.h>
+  
 watchClass watchList[100];
 int watchCount=0;
-const int watchConsleX=100;
+const int watchConsleX=810;
 const int watchConsleY=10;
 const int lineHeigtht=10;
 
@@ -39,9 +39,9 @@ void watchPrint(int index,int x)
 	memset(pstr,0,sizeof(pstr));
 	memset(fstr,0,sizeof(fstr));
 
-	strcpy(pstr,watchList[index].info);
-	sprintf(fstr," %d\0",x);
-	strcat(pstr,fstr);
+	//strcpy(pstr,watchList[index].info);
+	sprintf(pstr,"%-10s%6d\0",watchList[index].info,x);
+	//strcat(pstr,fstr);
 	beginPaint();
 	setTextSize(10);
 	paintText(watchConsleX,watchConsleY+watchList[index].row,pstr);
