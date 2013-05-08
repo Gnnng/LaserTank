@@ -31,10 +31,11 @@ void printTank(nodeClass *node)
 }
 void printLaser(int i)
 {
+	if (allLaser[i].pflag) return;
+	allLaser[i].pflag=1;
 	beginPaint();
 	line(allLaser[i].x0,allLaser[i].y0,allLaser[i].x0+allLaser[i].len*allLaser[i].xt,allLaser[i].y0+allLaser[i].len*allLaser[i].yt);
 	endPaint();
-
 }
 
 void printMap(int tid)
@@ -96,7 +97,8 @@ void initMap()
 		map[i][0].obj=WALL;
 		map[i][WINY].obj=WALL;
 	}
-	//setWall(0,400,WINX,400);
+	//setWall(0,400,WINX/2,400);
+	//setWall(WINX/2,400,WINX/2,100);
 	for (j=0;j<=WINY;j++)
 	{
 		map[0][j].obj=WALL;

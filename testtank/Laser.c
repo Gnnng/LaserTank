@@ -50,6 +50,7 @@ void initLaser(int x0,int y0,double xt,double yt,int speed)
 	laser->life=LASERLIFE;
 	laser->len=(int)(LASERLEN/sqrt(xt*xt+yt*yt));
 	laser->id=laserCount;
+	laser->pflag=0;
 }
 
 void insertLaser(laserClass	laser)
@@ -58,6 +59,7 @@ void insertLaser(laserClass	laser)
 	int flag;
 	int x,y,fx,fy,tx,ty;
 	fx=laser.x0;fy=laser.y0;
+	laser.pflag=0;
 	for (i=0;i<=laser.len;i++)
 	{
 		tx=laser.x0+i*laser.xt+1;//bug
@@ -97,7 +99,6 @@ void insertLaser(laserClass	laser)
 	}
 	allLaser[laser.id]=laser;
 }
-
 void cancelLaser(laserClass laser)
 {
 	int i;
@@ -135,6 +136,46 @@ void cancelLaser(laserClass laser)
 		fy=ty;
 	}
 }
+//by Gnnng 
+//void insertLaser(laserClass laser){
+//	int x,y,tx,ty;
+//	x=laser.x0;
+//	tx=x+laser.len*laser.xt+1;
+//	for(;x!=tx;x<tx?x++:x--){
+//		y=(x-tx)*laser.yt/laser.xt+ty;
+//		if(x>WINX || y>WINY || x<0 || y<0 || map[x][y].obj==WALL)
+//			//if (map[x][y].obj==WALL)
+//		{
+//			//beginPaint();
+//			laser.life=0;
+//			break;
+//		}
+//		if (map[x][y].obj!=TANK)
+//		{
+//			map[x][y].obj=LASER;
+//			map[x][y].id=laser.id;
+//		}	
+//	}
+//	allLaser[laser.id]=laser;
+//}
+//by Gnnng
+//void cancelLaser(laserClass laser){
+//	int x,y,tx,ty;
+//	x=laser.x0;
+//	tx=x+laser.len*laser.xt+1;
+//	for(;x!=tx;x<tx?x++:x--){
+//		y=(x-tx)*laser.yt/laser.xt+ty;
+//		if(x>WINX || y>WINY || x<0 || y<0 || map[x][y].obj==WALL)//copy from insertLaser
+//			//if (map[x][y].obj==WALL)
+//		{
+//			break;
+//		}
+//		if (map[x][y].obj==LASER)
+//		{
+//			map[x][y].obj=NOPE;
+//		}	
+//	}
+//}
 void changeLaser(laserClass laser1,laserClass laser2)
 {
 	cancelLaser(laser1);

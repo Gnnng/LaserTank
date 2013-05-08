@@ -17,6 +17,15 @@ void updateWithMap()
 void updateMouse(int x,int y,int button,int event){
 	int x0,y0;
 	double len;
+	//static int preX,preY;
+	//if (preX==0&&preY==0) {
+	//	preX=x;
+	//	preY=y;
+	//}
+	//if (x<0||y<0) {
+	//	x=preX+1;
+	//	y=preY+1;
+	//}
 	mousex=x;
 	mousey=y;
 	watch("Mouse x",x);
@@ -30,8 +39,12 @@ void updateMouse(int x,int y,int button,int event){
 		paintText(700,300,s);
 		endPaint();*/
 		len=sqrt((double)((x-x0)*(x-x0)+(y-y0)*(y-y0)));
-		initLaser(x0,y0,(double)(x-x0)/len,(double)(y-y0)/len,LASERSPEED);
-		insertLaser(allLaser[laserCount]);
+		watch("New laser X0",x0);
+		watch("New laser Y0",y0);
+		if (len) {
+			initLaser(x0,y0,(double)(x-x0)/len,(double)(y-y0)/len,LASERSPEED);
+			insertLaser(allLaser[laserCount]);
+		}
 	}
 	if (event==BUTTON_DOWN && button==RIGHT_BUTTON)
 	{
@@ -42,7 +55,8 @@ void updateMouse(int x,int y,int button,int event){
 		paintText(500,300,s);
 		endPaint();*/
 	}
-
+	//preX=x;
+	//preY=y;
 }  
 
 void updateKey(int key,int event)

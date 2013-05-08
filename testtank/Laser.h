@@ -2,7 +2,7 @@
 #define LASER_H
 
 #define MAXLASER 100
-#define LASERLEN 100
+#define LASERLEN 50
 #define LASERLIFE 30
 #define LASERSPEED 15
 
@@ -13,6 +13,7 @@ typedef struct _laserClass{
 	double xt,yt; // direction of laser
 	int life; // lifetime count after shooting
 	int id;
+	int pflag;
 } laserClass;
 
 extern laserClass allLaser[];
