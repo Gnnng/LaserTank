@@ -62,8 +62,10 @@ void insertLaser(laserClass	laser)
 	laser.pflag=0;
 	for (i=0;i<=laser.len;i++)
 	{
-		tx=laser.x0+i*laser.xt+1;//bug
-		ty=laser.y0+i*laser.yt+1;//bug
+		tx=laser.x0+i*laser.xt;//bug
+		ty=laser.y0+i*laser.yt;//bug
+		if (tx>fx) tx++; else tx--;
+		if (ty>fy) ty++; else ty--;
 		flag=0;
 		for (x=fx;x!=tx;)
 		{
@@ -107,8 +109,10 @@ void cancelLaser(laserClass laser)
 	fx=laser.x0;fy=laser.y0;
 	for (i=0;i<=laser.len;i++)
 	{
-		tx=laser.x0+i*laser.xt+1;//bug
-		ty=laser.y0+i*laser.yt+1;//bug
+		tx=laser.x0+i*laser.xt;//bug
+		ty=laser.y0+i*laser.yt;//bug
+		if (tx>fx) tx++; else tx--;
+		if (ty>fy) ty++; else ty--;
 		flag=0;
 		for (x=fx;x!=tx;)
 		{
