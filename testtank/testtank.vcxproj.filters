@@ -39,6 +39,12 @@
     <ClCompile Include="map.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ai.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="winmode.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h">
@@ -57,6 +63,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ai.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="winmode.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

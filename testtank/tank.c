@@ -32,7 +32,7 @@ void initTank(void)
 	tank->speed=5;
 	tank->radius=15;
 	tank->angle=0;
-	tank->id=1;
+	tank->id=tankCount;
 	tank->dx=1;
 	tank->len=30;
 	tank->dy=0;

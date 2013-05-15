@@ -81,20 +81,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="acllib.c" />
+    <ClCompile Include="ai.c" />
     <ClCompile Include="laser.c" />
     <ClCompile Include="map.c" />
     <ClCompile Include="tank.c" />
     <ClCompile Include="update.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="watch.c" />
+    <ClCompile Include="winmode.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h" />
+    <ClInclude Include="ai.h" />
     <ClInclude Include="laser.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="tank.h" />
     <ClInclude Include="update.h" />
     <ClInclude Include="watch.h" />
+    <ClInclude Include="winmode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

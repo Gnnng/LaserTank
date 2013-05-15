@@ -1,6 +1,7 @@
 #include "acllib.h"
 #include "laser.h"
 #include "tank.h"
+#include "winmode.h"
 #include <math.h>
 #include "map.h"
 
@@ -57,6 +58,7 @@ void insertLaser(laserClass	laser)
 {
 	int i;
 	int flag;
+	int tankcrash=0;
 	int x,y,fx,fy,tx,ty;
 	fx=laser.x0;fy=laser.y0;
 	laser.pflag=0;
@@ -81,9 +83,13 @@ void insertLaser(laserClass	laser)
 				}
 				if (map[x][y].obj!=TANK)
 				{
+					if (map[x][y].obj==TANKBODY)
+					{
+						wintime();
+					}
 					map[x][y].obj=LASER;
 					map[x][y].id=laser.id;
-				}	
+				}
 				if (ty>fy) y++; else y--;
 			}
 			if (flag)

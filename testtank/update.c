@@ -39,6 +39,8 @@ void updateMouse(int x,int y,int button,int event){
 		paintText(700,300,s);
 		endPaint();*/
 		len=sqrt((double)((x-x0)*(x-x0)+(y-y0)*(y-y0)));
+		x0=x0+(x-x0)/len*allTank[1].len;
+		y0=y0+(y-y0)/len*allTank[1].len;
 		watch("New laser X0",x0);
 		watch("New laser Y0",y0);
 		if (len) {
