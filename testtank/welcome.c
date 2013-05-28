@@ -9,7 +9,10 @@ void run(int tid)
 	int startx=220,starty=400;
 	runbar(startx,starty,times*5,30);
 	++times;
-	if (times==150) cancelTimer(0);
+	if (times==150) {
+		cancelTimer(tid);
+		startTimer(tid-1,10);
+	}
 }
 //remaining delete
 void runbar(int x,int y,int wid,int hei){
@@ -24,6 +27,5 @@ void runbar(int x,int y,int wid,int hei){
 
 void welcome()
 {
-	registerTimerEvent(run);
-	startTimer(1,10);
+	//run();
 }
