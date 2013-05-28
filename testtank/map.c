@@ -5,12 +5,16 @@
 #include "update.h"
 #include "map.h"
 #include <math.h>
+#include "winmode.h"
 
 nodeClass map[WINX+1][WINY+1];
 int counter=0;
 
 int dx[]={-1,0,1,0};
 int dy[]={0,-1,0,1};
+
+int wallx[]={600,600,750,750};
+int wally[]={100,500,500,100};
 
 void printTank(nodeClass *node)
 {
@@ -37,7 +41,6 @@ void printLaser(int i)
 	line(allLaser[i].x0,allLaser[i].y0,allLaser[i].x0+allLaser[i].len*allLaser[i].xt,allLaser[i].y0+allLaser[i].len*allLaser[i].yt);
 	endPaint();
 }
-
 void printMap(int tid)
 {
 	int i,j;
@@ -58,6 +61,7 @@ void printMap(int tid)
 #endif
 	endPaint();
 	watch("Counter ->",counter);
+	printWall();
 	for(i=0;i<WINX;i++)
 	{
 		for(j=0;j<WINY;j++)
@@ -89,6 +93,20 @@ void setWall(int fx,int fy,int tx,int ty){
 	}
 }
 
+void setLongWall(int n,int* xset,int *yset){
+	int i;
+	for(i=0;i<n-1;i++)
+		setWall(*(xset+i),*(yset+i),*(xset+i+1),*(yset+i+1));
+}
+
+void printWall(){
+	int i;
+	beginPaint();
+	for(i=0;i<3;i++)
+		line(*(wallx+i),*(wally+i),*(wallx+i+1),*(wally+i+1));
+	endPaint();
+}
+
 void initMap()
 {
 	int i,j;
@@ -99,6 +117,7 @@ void initMap()
 	}
 	//setWall(0,400,WINX/2,400);
 	//setWall(WINX/2,400,WINX/2,100);
+	setLongWall(4,wallx,wally);
 	for (j=0;j<=WINY;j++)
 	{
 		map[0][j].obj=WALL;

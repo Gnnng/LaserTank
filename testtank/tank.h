@@ -16,6 +16,8 @@ typedef struct _tankClass{
 	int radius;
 	int id;
 	int action;
+	//new properties
+	int move;
 } tankClass;
 
 extern tankClass allTank[MAXTANK];

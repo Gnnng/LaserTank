@@ -5,6 +5,8 @@
 #include <math.h>
 #include "update.h"
 #include "map.h"
+#include "ai.h"
+#include "winmode.h"
 
 int mousex,mousey;
 
@@ -12,6 +14,7 @@ void updateWithMap()
 {
 	controlTube(1,mousex,mousey);
 	updateLaser();
+	aiControl();
 }
 
 void updateMouse(int x,int y,int button,int event){

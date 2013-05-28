@@ -45,6 +45,9 @@
     <ClCompile Include="winmode.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="welcome.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h">
@@ -71,5 +74,13 @@
     <ClInclude Include="winmode.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="welcome.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Image.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

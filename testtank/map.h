@@ -30,10 +30,10 @@ extern int dy[];
 void printTank(nodeClass *);
 void printLaser(int i);
 void printMap(int );
-
+void printWall();
 //remaing build
 void setWall(int fx,int fy,int tx,int ty);
-
+void setLongWall(int n,int *xset,int *yset);
 //remaing remove
 void initMap();
 #endif

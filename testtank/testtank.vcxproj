@@ -88,6 +88,7 @@
     <ClCompile Include="update.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="watch.c" />
+    <ClCompile Include="welcome.c" />
     <ClCompile Include="winmode.c" />
   </ItemGroup>
   <ItemGroup>
@@ -98,7 +99,11 @@
     <ClInclude Include="tank.h" />
     <ClInclude Include="update.h" />
     <ClInclude Include="watch.h" />
+    <ClInclude Include="welcome.h" />
     <ClInclude Include="winmode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Image.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

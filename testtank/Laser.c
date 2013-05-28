@@ -86,6 +86,9 @@ void insertLaser(laserClass	laser)
 					if (map[x][y].obj==TANKBODY)
 					{
 						wintime();
+						flag=1;
+						laser.life=0;
+						break;
 					}
 					map[x][y].obj=LASER;
 					map[x][y].id=laser.id;
