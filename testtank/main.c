@@ -7,10 +7,10 @@ int Main()
 {
 	initWindow("LaserTank",DEFAULT,DEFAULT,WINX+200,WINY);
 	//binding the input
-	registerTimerEvent(printMap);
-	startTimer(1,10);
+	registerTimerEvent(updateTimer);
 	registerKeyboardEvent(updateKey);
 	registerMouseEvent(updateMouse);
+	startTimer(1,10);
 	//registerTimerEvent(aiControl);
 	//begin game
 	initMap();

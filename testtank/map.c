@@ -6,7 +6,7 @@
 #include "map.h"
 #include <math.h>
 #include "winmode.h"
-#include "welcome.h"
+#include "ai.h"
 
 nodeClass map[WINX+1][WINY+1];
 int counter=0;
@@ -42,53 +42,46 @@ void printLaser(int i)
 	line(allLaser[i].x0,allLaser[i].y0,allLaser[i].x0+allLaser[i].len*allLaser[i].xt,allLaser[i].y0+allLaser[i].len*allLaser[i].yt);
 	endPaint();
 }
+
 void printMap(int tid)
 {
 	int i,j;
 	static int cc;
 
-	switch(tid) {
-	case 1:
-		run(tid);
-		break;
-	case 0:
-		updateWithMap();
-		if (over==1) return;
-		beginPaint(); 
+	if (over==1) return;
+	beginPaint(); 
 #ifdef SHADOW
-		cc++;
-		if (cc==15)
-		{
+	cc++;
+	if (cc==15)
+	{
 #endif
-			//clearDevice();
-			setBrushColor(WHITE);
-			rectangle(0,0,WINX,WINY);
+		//clearDevice();
+		setBrushColor(WHITE);
+		rectangle(0,0,WINX,WINY);
 #ifdef SHADOW
-			cc=0;
-		}
+		cc=0;
+	}
 #endif
-		endPaint();
-		watch("Counter ->",counter);
-		printWall();
-		for(i=0;i<WINX;i++)
+	endPaint();
+	watch("Map Timer -->",counter);
+	printWall();
+	for(i=0;i<WINX;i++)
+	{
+		for(j=0;j<WINY;j++)
 		{
-			for(j=0;j<WINY;j++)
+			switch (map[i][j].obj)
 			{
-				switch (map[i][j].obj)
-				{
-				case NOPE: break;
-				case WALL: break;
-				case TANK: printTank(&map[i][j]); break;
-				case LASER: if (allLaser[map[i][j].id].life>0) printLaser(map[i][j].id); break;
-				}
+			case NOPE: break;
+			case WALL: break;
+			case TANK: printTank(&map[i][j]); break;
+			case LASER: if (allLaser[map[i][j].id].life>0) printLaser(map[i][j].id); break;
 			}
 		}
-		counter++;
-		if (counter==MAXEXISTTIME*1000) 
-		{
-			cancelTimer(0);
-		}
-		break;
+	}
+	counter++;
+	if (counter==MAXEXISTTIME*1000) 
+	{
+		cancelTimer(0);
 	}
 }
 

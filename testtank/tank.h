@@ -2,10 +2,6 @@
 #define TANK_H
 
 #define MAXTANK 10
-
-
-extern int tankCount;
-
 typedef struct _tankClass{
 	int x,y;// position
 	int dx,dy;// direction
@@ -21,6 +17,7 @@ typedef struct _tankClass{
 } tankClass;
 
 extern tankClass allTank[MAXTANK];
+extern int tankCount;
 
 void controlTank(int ,int );
 

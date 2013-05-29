@@ -48,6 +48,9 @@
     <ClCompile Include="welcome.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="menu.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acllib.h">
@@ -75,6 +78,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="welcome.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

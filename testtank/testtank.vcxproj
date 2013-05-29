@@ -84,6 +84,7 @@
     <ClCompile Include="ai.c" />
     <ClCompile Include="laser.c" />
     <ClCompile Include="map.c" />
+    <ClCompile Include="menu.c" />
     <ClCompile Include="tank.c" />
     <ClCompile Include="update.c" />
     <ClCompile Include="main.c" />
@@ -96,6 +97,7 @@
     <ClInclude Include="ai.h" />
     <ClInclude Include="laser.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="tank.h" />
     <ClInclude Include="update.h" />
     <ClInclude Include="watch.h" />

@@ -5,30 +5,40 @@
 #include <math.h>
 #include "update.h"
 #include "map.h"
-#include "ai.h"
+#include "menu.h"
 #include "winmode.h"
+#include "ai.h"
+
 
 int mousex,mousey;
 
-void updateWithMap()
-{
+void updateTimer(int tid){
+	switch(tid){
+	case 0:
+		mapTimer(tid);
+		break;
+	case 1:
+		menuTimer(tid);
+		break;
+	}
+}
+
+void mapTimer(int tid){
+	//man control
 	controlTube(1,mousex,mousey);
 	updateLaser();
-	aiControl();
+	//AI control
+	aiControl();	
+	printMap(tid);
+}
+
+void menuTimer(int tid){
+
 }
 
 void updateMouse(int x,int y,int button,int event){
 	int x0,y0;
 	double len;
-	//static int preX,preY;
-	//if (preX==0&&preY==0) {
-	//	preX=x;
-	//	preY=y;
-	//}
-	//if (x<0||y<0) {
-	//	x=preX+1;
-	//	y=preY+1;
-	//}
 	mousex=x;
 	mousey=y;
 	watch("Mouse x",x);
@@ -37,10 +47,6 @@ void updateMouse(int x,int y,int button,int event){
 	{
 		x0=allTank[1].x;
 		y0=allTank[1].y;
-		/*beginPaint();
-		sprintf(s,"x=%d,y=%d",x0,y0);
-		paintText(700,300,s);
-		endPaint();*/
 		len=sqrt((double)((x-x0)*(x-x0)+(y-y0)*(y-y0)));
 		x0=x0+(x-x0)/len*allTank[1].len;
 		y0=y0+(y-y0)/len*allTank[1].len;
@@ -55,13 +61,7 @@ void updateMouse(int x,int y,int button,int event){
 	{
 		watch("laser x ->",allLaser[map[x][y].id].x0);
 		watch("laser y ->",allLaser[map[x][y].id].y0);
-		/*beginPaint();
-		sprintf(s,"x0=%d,y0=%d",allLaser[map[x][y].id].x0,allLaser[map[x][y].id].y0);
-		paintText(500,300,s);
-		endPaint();*/
 	}
-	//preX=x;
-	//preY=y;
 }  
 
 void updateKey(int key,int event)
