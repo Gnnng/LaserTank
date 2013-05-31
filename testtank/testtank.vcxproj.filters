@@ -45,9 +45,6 @@
     <ClCompile Include="winmode.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="welcome.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="menu.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="winmode.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="welcome.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">

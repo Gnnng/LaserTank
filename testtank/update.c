@@ -11,15 +11,28 @@
 
 
 int mousex,mousey;
+int stage;
 
 void updateTimer(int tid){
+	static int cou=0;
 	switch(tid){
 	case 0:
+		stage=0;
 		mapTimer(tid);
 		break;
 	case 1:
+		stage=1;
 		menuTimer(tid);
 		break;
+	case 2:
+		cou++;
+		stage=2;
+		menuTimer(tid);
+		if (cou==30)
+		{
+			cancelTimer(2);
+			startTimer(0,10);
+		}
 	}
 }
 
@@ -33,28 +46,40 @@ void mapTimer(int tid){
 }
 
 void menuTimer(int tid){
+	printMenu();
 
 }
-
-void updateMouse(int x,int y,int button,int event){
-	int x0,y0;
-	double len;
+void LeftClickinmenu()
+{
+	int i;
+	i=findButton(mousex,mousey);
+	if (i!=-1)
+	{
+		switch(allButton[i].event)
+		{
+			case PLAY:
+				allButton[i].up=0;
+				cancelTimer(1);
+				startTimer(2,10);
+				break;
+		}
+	}
+}
+void updateMouse(int x,int y,int button,int event)
+{
 	mousex=x;
 	mousey=y;
 	watch("Mouse x",x);
 	watch("Mouse y",y);
 	if (event==BUTTON_DOWN && button==LEFT_BUTTON)
 	{
-		x0=allTank[1].x;
-		y0=allTank[1].y;
-		len=sqrt((double)((x-x0)*(x-x0)+(y-y0)*(y-y0)));
-		x0=x0+(x-x0)/len*allTank[1].len;
-		y0=y0+(y-y0)/len*allTank[1].len;
-		watch("New laser X0",x0);
-		watch("New laser Y0",y0);
-		if (len) {
-			initLaser(x0,y0,(double)(x-x0)/len,(double)(y-y0)/len,LASERSPEED);
-			insertLaser(allLaser[laserCount]);
+		if (stage==0)
+		{
+			LeftClickwhenFighting();
+		}
+		if (stage==1)
+		{
+			LeftClickinmenu();
 		}
 	}
 	if (event==BUTTON_DOWN && button==RIGHT_BUTTON)
@@ -63,6 +88,26 @@ void updateMouse(int x,int y,int button,int event){
 		watch("laser y ->",allLaser[map[x][y].id].y0);
 	}
 }  
+
+void LeftClickwhenFighting()
+{
+	int x0,y0;
+	double len;
+	int x,y;
+	x=mousex;
+	y=mousey;
+	x0=allTank[1].x;
+	y0=allTank[1].y;
+	len=sqrt((double)((x-x0)*(x-x0)+(y-y0)*(y-y0)));
+	x0=x0+(x-x0)/len*allTank[1].len;
+	y0=y0+(y-y0)/len*allTank[1].len;
+	watch("New laser X0",x0);
+	watch("New laser Y0",y0);
+	if (len) {
+		initLaser(x0,y0,(double)(x-x0)/len,(double)(y-y0)/len,LASERSPEED);
+		insertLaser(allLaser[laserCount]);
+	}
+}
 
 void updateKey(int key,int event)
 {

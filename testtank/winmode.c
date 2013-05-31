@@ -13,7 +13,7 @@ int wintime()
 	cancelTimer(0);
 	beginPaint();
 	clearDevice();
-	loadImage("winpic.jpg",winpic);
+	loadImage("img\\winpic.jpg",winpic);
 	putImageScale(winpic,0,0,WINX,WINY);
 	endPaint();
 	watch("win!",i);
