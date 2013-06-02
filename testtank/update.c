@@ -14,6 +14,7 @@ int mousex,mousey;
 int stage;
 
 void updateTimer(int tid){
+	int i;
 	static int cou=0;
 	switch(tid){
 	case 0:
@@ -32,6 +33,11 @@ void updateTimer(int tid){
 		{
 			cancelTimer(2);
 			startTimer(0,10);
+			cou=0;
+			for (i=0;i<=buttonCount;i++)
+			{
+				allButton[i].up=1;
+			}
 		}
 	}
 }
@@ -40,7 +46,7 @@ void mapTimer(int tid){
 	int i;
 	//man control
 	controlTube(1,mousex,mousey);
-	autoRun();
+	//autoRun();
 	updateLaser();
 	//AI control
 	for(i=2;i<=tankCount;i++)
@@ -83,6 +89,11 @@ void updateMouse(int x,int y,int button,int event)
 		if (stage==1)
 		{
 			LeftClickinmenu();
+		}
+		if (stage==2)
+		{
+			startTimer(1,10);
+			over=0;
 		}
 	}
 	if (event==BUTTON_DOWN && button==RIGHT_BUTTON)

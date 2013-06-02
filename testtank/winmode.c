@@ -10,6 +10,7 @@ int wintime()
 	int i=0;
 	ACL_Image *winpic=(ACL_Image*)malloc(sizeof(ACL_Image));
 	over=1;
+	stage=2;
 	cancelTimer(0);
 	beginPaint();
 	clearDevice();
