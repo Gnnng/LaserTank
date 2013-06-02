@@ -37,17 +37,20 @@ void updateTimer(int tid){
 }
 
 void mapTimer(int tid){
+	int i;
 	//man control
 	controlTube(1,mousex,mousey);
+	autoRun();
 	updateLaser();
 	//AI control
-	aiControl();	
+	for(i=2;i<=tankCount;i++)
+		(*(allTank[i].ctrl))(i);
+	//view 
 	printMap(tid);
 }
 
 void menuTimer(int tid){
 	printMenu();
-
 }
 void LeftClickinmenu()
 {
@@ -124,8 +127,11 @@ void updateKey(int key,int event)
 	}
 	switch(event){
 	case KEY_DOWN:
-		tank2.x+=tank2.speed*dx[key-LEFT];
-		tank2.y+=tank2.speed*dy[key-LEFT];
+		if(tank2.action==1) break;
+		tank2.dx=dx[key-LEFT];
+		tank2.dy=dy[key-LEFT];
+		tank2.x+=tank2.speed*tank2.dx;
+		tank2.y+=tank2.speed*tank2.dy;
 		watch("tank x ->",tank2.x);
 		watch("tank y ->",tank2.y);
 		tank2.action=1;

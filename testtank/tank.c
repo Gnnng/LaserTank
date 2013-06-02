@@ -21,10 +21,10 @@ void controlTube(int i,int x,int y)
 	allTank[1]=tank;
 }
   
-void initTank(void)
+void initTank(int id)
 {
-	tankClass *tank;
-	allTank[++tankCount];
+	tankClass *tank=&allTank[id];
+	//++tankCount;
 	tank=allTank+tankCount;
 	tank->x=getWidth()/2;
 	tank->y=getHeight()/2;
@@ -80,6 +80,17 @@ int cancelTank(tankClass tank){
 			map[i][j].obj=NOPE;
 		}
 	return 0;
+}
+
+int autoRun()
+{
+	tankClass tank1,tank2;
+	tank1=tank2=allTank[1];
+	if (tank1.action) {
+		tank2.x+=tank2.speed*tank2.dx;
+		tank2.y+=tank2.speed*tank2.dy;
+	}
+	changeTank(tank1,tank2);
 }
 
 int changeTank(tankClass tank1,tankClass tank2){

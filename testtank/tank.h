@@ -14,6 +14,8 @@ typedef struct _tankClass{
 	int action;
 	//new properties
 	int move;
+	int Aid;
+	void (*ctrl) (int);
 } tankClass;
 
 extern tankClass allTank[MAXTANK];
@@ -29,6 +31,6 @@ int cancelTank(tankClass );
 
 void controlTube(int,int,int);
 
-void initTank(void);
+void initTank(int id);
 
 #endif

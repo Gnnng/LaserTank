@@ -5,7 +5,12 @@
 #include "Laser.h"
 #include "watch.h"
 
-int ai();
-void aiControl();
+enum {
+	BASIC
+} AItype;
+
+int initAI();
+void addAI();
+void aiControl(int id);
 
 #endif

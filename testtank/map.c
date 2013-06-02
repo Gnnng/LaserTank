@@ -128,6 +128,9 @@ void initMap()
 	}
 	tankCount=0;
 	laserCount=0;
-	initTank();
+	//set MAN
+	initTank(tankCount++);
 	insertTank(allTank[1]);
+	//set AI
+	initAI();
 }
