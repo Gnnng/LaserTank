@@ -30,6 +30,13 @@ void printTank(nodeClass *node)
 	rectangle(leftx,lefty,rightx,righty);
 	ellipse(tank.x-tank.radius,tank.y-tank.radius,tank.x+tank.radius,tank.y+tank.radius);
 	setPenWidth(3);
+	if (tank.tubeLock==1)
+	{
+		if (tank.dy==1) tank.angle=Pi/2;
+		if (tank.dy==-1) tank.angle=3*Pi/2;
+		if (tank.dx==1) tank.angle=0;
+		if (tank.dx==-1) tank.angle=Pi;
+	}
 	line(tank.x,tank.y,tank.x+(int)(tank.len*cos(tank.angle)),tank.y+(int)(tank.len*sin(tank.angle)));
 	setPenWidth(1);
 	endPaint();
@@ -131,6 +138,7 @@ void initMap()
 	//set MAN
 	initTank(tankCount++);
 	insertTank(allTank[1]);
+	allTank[1].tubeLock=0;
 	//set AI
 	initAI();
 }

@@ -14,13 +14,14 @@ typedef struct _tankClass{
 	int action;
 	//new properties
 	int move;
-	int Aid;
+	char tubeLock;
 	void (*ctrl) (int);
 } tankClass;
 
 extern tankClass allTank[MAXTANK];
 extern int tankCount;
 
+int autoRun();
 void controlTank(int ,int );
 
 int insertTank(tankClass );

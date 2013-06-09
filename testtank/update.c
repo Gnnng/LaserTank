@@ -46,7 +46,7 @@ void mapTimer(int tid){
 	int i;
 	//man control
 	controlTube(1,mousex,mousey);
-	//autoRun();
+	autoRun();
 	updateLaser();
 	//AI control
 	for(i=2;i<=tankCount;i++)

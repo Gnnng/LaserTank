@@ -6,7 +6,7 @@
 
 int Main()
 {
-	initWindow("LaserTank",DEFAULT,DEFAULT,WINX+200,WINY);
+	initWindow("LaserTank",DEFAULT,DEFAULT,WINX,WINY);
 	//binding the input
 	initMenu();
 	registerTimerEvent(updateTimer);

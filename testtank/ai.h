@@ -11,6 +11,7 @@ enum {
 
 int initAI();
 void addAI();
-void aiControl(int id);
-
+void aiControl1(int id);
+void aiControl2(int id);
+void ai3(int id);
 #endif
