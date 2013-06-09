@@ -14,6 +14,7 @@ extern int mousex,mousey;
 void updateTimer(int tid);
 void mapTimer(int tid);
 void menuTimer(int tid);
+void keyTimer(int tid);
 
 /*============= Mouse Controller ====================*/
 void controlTube(int i,int x,int y);

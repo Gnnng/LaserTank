@@ -91,6 +91,7 @@ int autoRun()
 		tank2.y+=tank2.speed*tank2.dy;
 	}
 	changeTank(tank1,tank2);
+	return 0;
 }
 
 int changeTank(tankClass tank1,tankClass tank2){

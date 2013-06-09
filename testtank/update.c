@@ -9,9 +9,24 @@
 #include "winmode.h"
 #include "ai.h"
 
+#define MYKEYDOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0) 
+#define MYKEYUP(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 0 : 1) 
 
 int mousex,mousey;
 int stage;
+int keyList[10]={87/*w*/,65/*a*/,83/*s*/,68/*d*/,UP,LEFT,DOWN,RIGHT};
+
+void keyTimer(int tid){
+	static int lastKey;
+	short key;
+	int i;
+	watch("lastkey",lastKey);
+	for(i=0;i<8;i++)
+	{
+		if(MYKEYDOWN(keyList[i])) updateKey(keyList[i],KEY_DOWN);
+		if(MYKEYUP(keyList[i])) updateKey(keyList[i],KEY_UP);
+	}
+}
 
 void updateTimer(int tid){
 	int i;
@@ -19,6 +34,7 @@ void updateTimer(int tid){
 	switch(tid){
 	case 0:
 		stage=0;
+		keyTimer(tid);
 		mapTimer(tid);
 		break;
 	case 1:
@@ -46,7 +62,7 @@ void mapTimer(int tid){
 	int i;
 	//man control
 	controlTube(1,mousex,mousey);
-	autoRun();
+	//autoRun();//DON'T TOUCH
 	updateLaser();
 	//AI control
 	for(i=2;i<=tankCount;i++)

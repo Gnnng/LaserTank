@@ -20,27 +20,28 @@ int wally[]={100,500,500,100};
 void printTank(nodeClass *node)
 {
 	int leftx,lefty,rightx,righty;
-	tankClass tank=allTank[node->id];
-	leftx=tank.x-tank.width/2;
-	lefty=tank.y-tank.width/2;
-	rightx=tank.x+tank.width/2;
-	righty=tank.y+tank.width/2;
+	tankClass *tank=&allTank[node->id];
+	if (tank->tubeLock==1)
+	{
+		if (tank->dy==1) tank->angle=Pi/2;
+		if (tank->dy==-1) tank->angle=3*Pi/2;
+		if (tank->dx==1) tank->angle=0;
+		if (tank->dx==-1) tank->angle=Pi;
+	}
+	leftx=tank->x-tank->width/2;
+	lefty=tank->y-tank->width/2;
+	rightx=tank->x+tank->width/2;
+	righty=tank->y+tank->width/2;
 	beginPaint();
 	setBrushColor(EMPTY);
 	rectangle(leftx,lefty,rightx,righty);
-	ellipse(tank.x-tank.radius,tank.y-tank.radius,tank.x+tank.radius,tank.y+tank.radius);
+	ellipse(tank->x-tank->radius,tank->y-tank->radius,tank->x+tank->radius,tank->y+tank->radius);
 	setPenWidth(3);
-	if (tank.tubeLock==1)
-	{
-		if (tank.dy==1) tank.angle=Pi/2;
-		if (tank.dy==-1) tank.angle=3*Pi/2;
-		if (tank.dx==1) tank.angle=0;
-		if (tank.dx==-1) tank.angle=Pi;
-	}
-	line(tank.x,tank.y,tank.x+(int)(tank.len*cos(tank.angle)),tank.y+(int)(tank.len*sin(tank.angle)));
+	line(tank->x,tank->y,tank->x+(int)(tank->len*cos(tank->angle)),tank->y+(int)(tank->len*sin(tank->angle)));
 	setPenWidth(1);
 	endPaint();
 }
+
 void printLaser(int i)
 {
 	if (allLaser[i].pflag) return;

@@ -4,13 +4,15 @@
 #include "Laser.h"
 #include "watch.h"
 #include <math.h>
+#include <stdlib.h>
+#include <time.h>
 
 int initAI()
 {
-	addAI(100,100);
-	allTank[tankCount].ctrl=aiControl1;
-	addAI(60,500);
-	allTank[tankCount].ctrl=aiControl2;
+	//addAI(100,100);
+	//allTank[tankCount].ctrl=aiControl1;
+	//addAI(60,500);
+	//allTank[tankCount].ctrl=aiControl2;
 	addAI(100,400);
 	allTank[tankCount].ctrl=ai3;
 }
@@ -58,6 +60,11 @@ void aiControl1(int id){
 	changeTank(tank1,tank2);
 }
 
+int myRand(int x){
+	srand((int)clock());
+	return rand()%x;
+}
+
 int aiTurnRight(tankClass *ai,int angle/*=1,2,3*/){
 	int dx0,dy0;
 	dx0=ai->dx;
@@ -76,13 +83,33 @@ int aiTurnRight(tankClass *ai,int angle/*=1,2,3*/){
 		ai->dy=-dx0;
 		break;
 	}
+	return 0;
 }
 
 int aiForward(tankClass *ai){
 	ai->x+=ai->speed*ai->dx;
 	ai->y+=ai->speed*ai->dy;
+	return 0;
 }
 
+int aiFire(tankClass *ai) {
+	int x0,y0;
+	double len;
+	int x,y;
+	//x=mousex;
+	//y=mousey;
+	x0=ai->x;
+	y0=ai->y;
+	//len=sqrt((double)((x-x0)*(x-x0)+(y-y0)*(y-y0)));
+	x0=x0+cos(ai->angle)*(ai->len);
+	y0=y0+sin(ai->angle)*(ai->len);
+	//watch("New laser X0",x0);
+	//watch("New laser Y0",y0);
+	initLaser(x0,y0,cos(ai->angle),sin(ai->angle),LASERSPEED);
+	watch("ai angle",ai->angle/Pi);
+	watch("ai tubelock",ai->tubeLock);
+	insertLaser(allLaser[laserCount]);
+}
 void aiControl2(int id)  //遇到障碍物就掉头
 {
 	tankClass tank1,tank2;
@@ -93,10 +120,12 @@ void aiControl2(int id)  //遇到障碍物就掉头
 		aiTurnRight(&tank2,2);
 		changeTank(tank1,tank2);
 	}
+	if (!myRand(100)) aiFire(allTank+id);
 }
 
 void ai3(int id) //遇到障碍就右转
 {
+	static int tt;
 	tankClass tank1,tank2;
 	tank1=tank2=allTank[id];
 	aiForward(&tank2);
@@ -105,4 +134,11 @@ void ai3(int id) //遇到障碍就右转
 		aiTurnRight(&tank2,1);
 		changeTank(tank1,tank2);
 	}
+	if(tt==100) 
+	{
+		aiFire(allTank+id);
+		tt=0;
+	}
+	tt++;
 }
+

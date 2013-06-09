@@ -6,11 +6,11 @@
 
 int Main()
 {
-	initWindow("LaserTank",DEFAULT,DEFAULT,WINX,WINY);
+	initWindow("LaserTank",DEFAULT,DEFAULT,WINX+200,WINY);
 	//binding the input
 	initMenu();
 	registerTimerEvent(updateTimer);
-	registerKeyboardEvent(updateKey);
+	//registerKeyboardEvent(updateKey);
 	registerMouseEvent(updateMouse);
 	startTimer(1,10);
 	//registerTimerEvent(aiControl);

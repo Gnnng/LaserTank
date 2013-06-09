@@ -1,7 +1,7 @@
 #ifndef LASER_H
 #define LASER_H
 
-#define MAXLASER 100
+#define MAXLASER 1000
 #define LASERLEN 50
 #define LASERLIFE 30
 #define LASERSPEED 15
