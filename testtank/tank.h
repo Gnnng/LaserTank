@@ -7,6 +7,7 @@ typedef struct _tankClass{
 	int dx,dy;// direction
 	int speed;
 	double angle;// Laser gun's angle
+	double RollSpeed;
 	int len;//laser gun's length
 	int width;
 	int radius;
@@ -15,6 +16,7 @@ typedef struct _tankClass{
 	//new properties
 	int move;
 	char tubeLock;
+	char fireCD;
 	void (*ctrl) (int);
 } tankClass;
 
@@ -34,4 +36,5 @@ void controlTube(int,int,int);
 
 void initTank(int id);
 
+double getAngle(int,int,int,int);
 #endif

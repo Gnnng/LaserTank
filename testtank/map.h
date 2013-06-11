@@ -4,7 +4,7 @@
 #define WINX 800
 #define WINY 600
 #define MAXEXISTTIME 500
-#define Pi 3.1415926
+#define Pi 3.14159265358979
 
 typedef enum{
 	NOPE,

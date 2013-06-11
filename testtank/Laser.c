@@ -4,7 +4,7 @@
 #include "winmode.h"
 #include <math.h>
 #include "map.h"
-
+#include "watch.h"
 laserClass allLaser[MAXLASER];
 int laserCount;
 
@@ -85,6 +85,7 @@ void insertLaser(laserClass	laser)
 				{
 					if (map[x][y].obj==TANKBODY)
 					{
+						watch("winning laser from",laser.tankID);
 						wintime();
 						flag=1;
 						laser.life=0;

@@ -14,9 +14,9 @@ void addAI();
 int myRand(int x);
 /*================= Basic AI Action ==================*/
 
-int aiTurnRight(tankClass *ai,int angle/*=1,2,3*/);
+//int aiTurnRight(tankClass *ai,int angle/*=1,2,3*/);
 int aiForward(tankClass *ai);
-
+int aiFire(tankClass *ai);
 /*================= AI Control Mode ===================*/
 void aiControl1(int id);
 void aiControl2(int id);

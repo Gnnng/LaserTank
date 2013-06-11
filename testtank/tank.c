@@ -9,6 +9,30 @@
 tankClass allTank[MAXTANK];
 int tankCount;
 
+
+double getAngle(int ax,int ay,int bx,int by) //angle from a to b
+{
+	double ans;
+	double ux,uy,theta;
+	uy=by-ay;
+	ux=bx-ax;
+	if (ux==0) theta=(uy/fabs(uy))*Pi/2; else theta=uy/ux;
+	ans=atan(theta);
+	if (ux<0) ans+=Pi;
+	/*ux=bx-ax;
+	uy=by-ay;
+	if (ux==0) 
+		if (uy>0) 
+			ans=Pi/2;
+		else if (uy<0)
+			ans=3*Pi/2;
+		else
+			ans=0;
+	else
+		ans=atan((double)uy/(double)ux);*/
+	return ans;
+}
+
 void controlTube(int i,int x,int y)
 {
 	tankClass tank=allTank[1];

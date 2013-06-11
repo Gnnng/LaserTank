@@ -13,6 +13,7 @@ typedef struct _laserClass{
 	double xt,yt; // direction of laser
 	int life; // lifetime count after shooting
 	int id;
+	int tankID;
 	int pflag;
 } laserClass;
 
