@@ -5,6 +5,7 @@
 #include "update.h"
 #include "map.h"
 #include <math.h>
+#include <string.h>
 #include "winmode.h"
 #include "ai.h"
 
@@ -121,6 +122,7 @@ void printWall(){
 void initMap()
 {
 	int i,j;
+	memset(map,0,sizeof(map));
 	for (i=0;i<=WINX;i++)
 	{
 		map[i][0].obj=WALL;

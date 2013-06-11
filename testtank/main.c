@@ -15,7 +15,6 @@ int Main()
 	startTimer(1,10);
 	//registerTimerEvent(aiControl);
 	//begin game
-	initMap();
 	//welcome();
 	return 0;
 }
