@@ -105,11 +105,15 @@ void mapTimer(int tid){
 	int i;
 	//man control
 	controlTube(1,mousex,mousey);
+	if (allTank[1].fireCD) allTank[1].fireCD--;
+	watch("tank 1 CD ",allTank[1].fireCD);
 	//autoRun();//DON'T TOUCH
 	updateLaser();
 	//AI control
-	for(i=2;i<=tankCount;i++)
+	for(i=2;i<=tankCount;i++) {
+		if (allTank[i].fireCD) allTank[i].fireCD--;
 		(*(allTank[i].ctrl))(i);
+	}
 	//view 
 	printMap(tid);
 }
@@ -169,6 +173,9 @@ void LeftClickwhenFighting()
 	int x0,y0;
 	double len;
 	int x,y;
+	if (allTank[1].fireCD) {
+		return ;
+	}
 	x=mousex;
 	y=mousey;
 	x0=allTank[1].x;
@@ -182,6 +189,7 @@ void LeftClickwhenFighting()
 		initLaser(x0,y0,(double)(x-x0)/len,(double)(y-y0)/len,LASERSPEED,LASERLIFE,1);
 		insertLaser(allLaser[laserCount]);
 	}
+	allTank[1].fireCD=MAXCD;
 }
 
 void updateKey(int key,int event)

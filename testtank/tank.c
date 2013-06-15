@@ -57,6 +57,7 @@ void initTank(int id)
 	tank->dx=1;
 	tank->len=31;
 	tank->dy=0;
+	tank->fireCD=MAXCD;
 }
 
 int insertTank(tankClass tank)

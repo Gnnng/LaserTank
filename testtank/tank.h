@@ -2,6 +2,7 @@
 #define TANK_H
 
 #define MAXTANK 10
+#define MAXCD 100
 typedef struct _tankClass{
 	int x,y;// position
 	int dx,dy;// direction
@@ -16,7 +17,7 @@ typedef struct _tankClass{
 	//new properties
 	int move;
 	char tubeLock;
-	char fireCD;
+	int fireCD;
 	void (*ctrl) (int);
 } tankClass;
 
