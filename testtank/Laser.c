@@ -54,7 +54,7 @@ void initLaser(int x0,int y0,double xt,double yt,int speed,int span,int tankid)
 	laser->span=span;
 	sq=xt*xt+yt*yt;
 	sq=sqrt(sq);
-	laser->len=(int)(50/sq);
+	laser->len=(int)(LASERLEN/sq);
 	laser->id=laserCount;
 	laser->pflag=0;
 	laser->tankID=tankid;
@@ -81,7 +81,7 @@ void insertLaser(laserClass	laser)
 			for(y=fy;y!=ty;)
 			{
 				if(x>WINX || y>WINY || x<0 || y<0)
-				if (map[x][y].obj==WALL)	
+				//if (map[x][y].obj==WALL)	
 				{
 					//beginPaint();
   				    laser.life=0;

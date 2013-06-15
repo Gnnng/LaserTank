@@ -10,12 +10,12 @@
 const double fireScope=Pi/12;
 int initAI()
 {
-	//addAI(100,100);
-	//allTank[tankCount].ctrl=aiControl1;
+	addAI(100,100);
+	allTank[tankCount].ctrl=aiControl1;
 	addAI(300,300);
 	allTank[tankCount].ctrl=aiControl2;
-	/*addAI(100,400);
-	allTank[tankCount].ctrl=ai3;*/
+	addAI(100,400);
+	allTank[tankCount].ctrl=ai3;
 }
 
 void addAI(int x,int y)

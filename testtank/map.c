@@ -125,17 +125,18 @@ void initMap()
 	memset(map,0,sizeof(map));
 	for (i=0;i<=WINX;i++)
 	{
-		map[i][0].obj=WALL;
-		map[i][WINY].obj=WALL;
+		map[i][1].obj=WALL;
+		map[i][WINY-1].obj=WALL;
 	}
 	//setWall(0,400,WINX/2,400);
 	//setWall(WINX/2,400,WINX/2,100);
-	setLongWall(4,wallx,wally);
 	for (j=0;j<=WINY;j++)
 	{
-		map[0][j].obj=WALL;
-		map[WINX][j].obj=WALL;
+		map[1][j].obj=WALL;
+		map[WINX-1][j].obj=WALL;
 	}
+
+	setLongWall(4,wallx,wally);
 	tankCount=0;
 	laserCount=0;
 	//set MAN
