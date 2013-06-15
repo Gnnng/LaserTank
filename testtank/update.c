@@ -48,7 +48,7 @@ void updateTimer(int tid){
 		break;
 	case 2:
 		cou++;
-		stage=2;
+		stage=3;
 		menuTimer(tid);
 		if (cou==30)
 		{
