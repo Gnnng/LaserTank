@@ -95,7 +95,7 @@ void insertLaser(laserClass	laser)
 					laser.span=laser.life;
 					laser.x0=x;laser.y0=y;
 					laser.ox=x;laser.oy=y;
-					if (map[x+1][y].obj==WALL || map[x-1][y].obj==WALL || (map[x+1][y].obj==TANKBODY && map[x-1][y].obj==TANKBODY))
+					if (map[x][y].obj==WALL && (map[x+1][y].obj==WALL || map[x-1][y].obj==WALL) || map[x][y].obj==TANKBODY && (map[x+1][y].obj==TANKBODY && map[x-1][y].obj==TANKBODY))
 					{
 						laser.yt=-laser.yt;
 					}
@@ -103,7 +103,7 @@ void insertLaser(laserClass	laser)
 					{
 						nyt=laser.yt;
 					}
-					if (map[x][y+1].obj==WALL || map[x][y-1].obj==WALL || (map[x][y+1].obj==TANKBODY && map[x-1][y-1].obj==TANKBODY))
+					if (map[x][y].obj==WALL && (map[x][y+1].obj==WALL || map[x][y-1].obj==WALL) || map[x][y].obj==TANKBODY && (map[x][y+1].obj==TANKBODY && map[x-1][y-1].obj==TANKBODY))
 					{
 						laser.xt=-laser.xt;
 					}
