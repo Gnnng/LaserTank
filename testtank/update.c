@@ -17,14 +17,56 @@ int stage;
 int keyList[10]={87/*w*/,65/*a*/,83/*s*/,68/*d*/,UP,LEFT,DOWN,RIGHT};
 
 void keyTimer(int tid){
-	static int lastKey;
+	static int lastKey=0;
 	short key;
 	int i;
+	int down,up;
 	watch("lastkey",lastKey);
+	down=up=0;
+	//for(i=0;i<8;i++)
+	//{
+	//	if (MYKEYDOWN(keyList[i])) {
+	//		updateKey(keyList[i],KEY_DOWN);
+	//		lastKey=keyList[i];
+	//		break;
+	//	}
+	//	if (MYKEYUP(keyList[i])&&keyList[i]==lastKey) {
+	//		updateKey(keyList[i],KEY_UP);
+	//		break;
+	//	}
+
+	//}
+
 	for(i=0;i<8;i++)
 	{
-		if(MYKEYDOWN(keyList[i])) updateKey(keyList[i],KEY_DOWN);
-		if(MYKEYUP(keyList[i])) updateKey(keyList[i],KEY_UP);
+		if (lastKey==0) {
+			if(MYKEYDOWN(keyList[i])) {
+				lastKey=keyList[i];
+				updateKey(lastKey,KEY_DOWN);
+				break;
+			}
+		}
+		else {
+			if (lastKey==keyList[i]) {
+				if (MYKEYDOWN(lastKey)) {
+					lastKey=keyList[i];
+					updateKey(lastKey,KEY_DOWN);
+					break;
+				}
+				if (MYKEYUP(lastKey)) {
+					lastKey=0;
+					updateKey(keyList[i],KEY_UP);
+					break;
+				}
+			}
+			else {
+				if (MYKEYDOWN(keyList[i])) {
+					lastKey=keyList[i];
+					updateKey(lastKey,KEY_DOWN);
+					break;
+				}
+			}
+		}
 	}
 }
 
@@ -51,7 +93,7 @@ void updateTimer(int tid){
 			startTimer(0,10);
 			initMap();
 			cou=0;
-			for (i=0;i<=buttonCount;i++)
+			for(i=0;i<=buttonCount;i++)
 			{
 				allButton[i].up=1;
 			}
@@ -95,8 +137,10 @@ void updateMouse(int x,int y,int button,int event)
 {
 	mousex=x;
 	mousey=y;
-	watch("Mouse x",x);
-	watch("Mouse y",y);
+	//watch("Mouse x",x);
+	//watch("Mouse y",y);
+	/*watch("Test the angle ",getAngle(400,300,x,y)*180/Pi);
+	watch("Man tank angle ",allTank[1].angle*180/Pi);*/
 	if (event==BUTTON_DOWN && button==LEFT_BUTTON)
 	{
 		if (stage==0)
@@ -155,17 +199,17 @@ void updateKey(int key,int event)
 	}
 	switch(event){
 	case KEY_DOWN:
-		if(tank2.action==1) break;
+		//if(tank2.action==1) break;
 		tank2.dx=dx[key-LEFT];
 		tank2.dy=dy[key-LEFT];
 		tank2.x+=tank2.speed*tank2.dx;
 		tank2.y+=tank2.speed*tank2.dy;
 		watch("tank x ->",tank2.x);
 		watch("tank y ->",tank2.y);
-		tank2.action=1;
+		//tank2.action=1;
 		break;
 	case KEY_UP:
-		tank2.action=0;
+		//tank2.action=0;
 		break;
 	}
 	changeTank(tank1,tank2);
