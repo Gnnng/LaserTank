@@ -132,7 +132,7 @@ int aiFire(tankClass *ai) {
 	//watch("New laser X0",x0);
 	//watch("New laser Y0",y0);
 	
-	initLaser(x0,y0,cos(ai->angle),sin(ai->angle),LASERSPEED);
+	initLaser(x0,y0,cos(ai->angle),sin(ai->angle),LASERSPEED,LASERLIFE,ai->id);
 	watch("ai angle",ai->angle/Pi);
 	watch("ai tubelock",ai->tubeLock);
 	insertLaser(allLaser[laserCount]);

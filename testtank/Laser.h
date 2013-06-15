@@ -12,6 +12,7 @@ typedef struct _laserClass{
 	int len;
 	double xt,yt; // direction of laser
 	int life; // lifetime count after shooting
+	int span;
 	int id;
 	int tankID;
 	int pflag;
@@ -22,7 +23,7 @@ extern int laserCount;
 
 void insertLaser(laserClass );
 
-void initLaser(int,int,double,double,int);
+void initLaser(int,int,double,double,int,int,int);
 
 void cancelLaser(laserClass);
 

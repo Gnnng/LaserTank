@@ -135,7 +135,7 @@ void LeftClickwhenFighting()
 	watch("New laser X0",x0);
 	watch("New laser Y0",y0);
 	if (len) {
-		initLaser(x0,y0,(double)(x-x0)/len,(double)(y-y0)/len,LASERSPEED);
+		initLaser(x0,y0,(double)(x-x0)/len,(double)(y-y0)/len,LASERSPEED,LASERLIFE,1);
 		insertLaser(allLaser[laserCount]);
 	}
 }
