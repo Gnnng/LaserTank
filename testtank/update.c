@@ -17,10 +17,15 @@ int stage;
 int keyList[10]={87/*w*/,65/*a*/,83/*s*/,68/*d*/,UP,LEFT,DOWN,RIGHT};
 
 void keyTimer(int tid){
-	static int lastKey;
+	static int lastKey=0;
 	short key;
 	int i;
+	int down,up;
 	watch("lastkey",lastKey);
+	down=up=0;
+	//for(i=0;i<8;i++) {
+	//	if (MYKEY
+	//}
 	for(i=0;i<8;i++)
 	{
 		if(MYKEYDOWN(keyList[i])) updateKey(keyList[i],KEY_DOWN);
@@ -95,8 +100,10 @@ void updateMouse(int x,int y,int button,int event)
 {
 	mousex=x;
 	mousey=y;
-	watch("Mouse x",x);
-	watch("Mouse y",y);
+	//watch("Mouse x",x);
+	//watch("Mouse y",y);
+	watch("Test the angle ",getAngle(400,300,x,y)*180/Pi);
+	watch("Man tank angle ",allTank[1].angle*180/Pi);
 	if (event==BUTTON_DOWN && button==LEFT_BUTTON)
 	{
 		if (stage==0)

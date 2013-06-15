@@ -16,33 +16,30 @@ double getAngle(int ax,int ay,int bx,int by) //angle from a to b
 	double ux,uy,theta;
 	uy=by-ay;
 	ux=bx-ax;
-	if (ux==0) theta=(uy/fabs(uy))*Pi/2; else theta=uy/ux;
+	if (ux==0) {
+		if (uy>0) ans=Pi/2; else ans=3*Pi/2;
+		return ans;
+	}
+	else theta=uy/ux;
 	ans=atan(theta);
 	if (ux<0) ans+=Pi;
-	/*ux=bx-ax;
-	uy=by-ay;
-	if (ux==0) 
-		if (uy>0) 
-			ans=Pi/2;
-		else if (uy<0)
-			ans=3*Pi/2;
-		else
-			ans=0;
-	else
-		ans=atan((double)uy/(double)ux);*/
+	if (ans<0) ans+=Pi*2;
 	return ans;
 }
 
 void controlTube(int i,int x,int y)
 {
 	tankClass tank=allTank[1];
-	double a,b,theta;
+	/*double a,b,theta;
 	a=-(tank.y-y);
 	b=-(tank.x-x);
 	if (b==0)  theta=(a/fabs(a))*Pi/2; else theta=a/b;
 	tank.angle=atan(theta);
 	if (b<0) tank.angle+=Pi;
+	*/
+	tank.angle=getAngle(tank.x,tank.y,x,y);
 	allTank[1]=tank;
+
 }
   
 void initTank(int id)
@@ -58,7 +55,7 @@ void initTank(int id)
 	tank->angle=0;
 	tank->id=tankCount;
 	tank->dx=1;
-	tank->len=30;
+	tank->len=31;
 	tank->dy=0;
 }
 
