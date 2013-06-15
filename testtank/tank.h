@@ -33,6 +33,7 @@ int changeTank(tankClass,tankClass);
 
 int cancelTank(tankClass );
 
+int printCDBar(tankClass );
 void controlTube(int,int,int);
 
 void initTank(int id);

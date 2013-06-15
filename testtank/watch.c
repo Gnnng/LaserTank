@@ -7,7 +7,7 @@ watchClass watchList[100];
 int watchCount=0;
 const int watchConsleX=810;
 const int watchConsleY=10;
-const int lineHeigtht=10;
+const int lineHeigtht=15;
 
 int watchFind(const char *info)
 {
@@ -43,7 +43,10 @@ void watchPrint(int index,int x)
 	sprintf(pstr,"%-10s%6d\0",watchList[index].info,x);
 	//strcat(pstr,fstr);
 	beginPaint();
-	setTextSize(10);
+	setTextSize(15);
+	setTextBkColor(WHITE);
+	setTextColor(RED);
+	setTextFont("ËÎÌו");
 	paintText(watchConsleX,watchConsleY+watchList[index].row,pstr);
 	endPaint();
 }

@@ -88,7 +88,7 @@ void insertLaser(laserClass	laser)
 					flag=1;
 					break;
 				}
-				if (map[x][y].obj==WALL || ( laser.tankID>=1 && map[x][y].obj==TANKBODY && map[x][y].id>=1))
+				if (map[x][y].obj==WALL || ( laser.tankID>1 && map[x][y].obj==TANKBODY && map[x][y].id>1))
 				{
 					flag=1;
 					cancelLaser(laser);
@@ -129,7 +129,7 @@ void insertLaser(laserClass	laser)
 					if (map[x][y].obj==TANKBODY)
 					{
 						watch("winning laser from",laser.tankID);
-						//wintime();
+						wintime();
 						flag=1;
 						laser.life=0;
 						break;

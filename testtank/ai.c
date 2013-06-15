@@ -7,22 +7,17 @@
 #include <stdlib.h>
 #include <time.h>
 
-const double fireScope=Pi/12;
 int initAI()
 {
-	addAI(100,100);
-	allTank[tankCount].ctrl=aiControl1;
-	addAI(300,300);
-	allTank[tankCount].ctrl=aiControl2;
-	addAI(100,400);
-	allTank[tankCount].ctrl=ai3;
+	addAI(100,100,aiControl1);
+	addAI(300,300,aiControl2);
+	addAI(100,400,ai3);
 }
 
-void addAI(int x,int y)
+int addAI(int x,int y,void (*ctrl) (int))
 {
 	int i;
 	tankClass *aitank;
-
 	initTank(++tankCount);
 	i=tankCount;
 	aitank=&allTank[i];
@@ -32,9 +27,11 @@ void addAI(int x,int y)
 	aitank->dx=1;
 	aitank->dy=0;
 	aitank->tubeLock=1;
-	aitank->RollSpeed=Pi/50;
+	aitank->RollSpeed=Pi/180;
 	aitank->move=50;
 	insertTank(*aitank);
+	aitank->ctrl=ctrl;
+	return i;
 }
 
 int aiTurnRight(tankClass *ai,int angle){
@@ -66,12 +63,21 @@ int myRand(int x){
 int aiTubeRoll(tankClass *ai) {
 	ai->tubeLock=0;
 	ai->angle+=ai->RollSpeed;
-	watch("ai->angle",ai->angle/Pi*180);
 	if (ai->angle>=2*Pi) ai->angle-=2*Pi;
+}
+
+int aiTubeTurnTo(tankClass *ai,double goal) {
+	double delta;
+	ai->tubeLock=0;
+	delta=fabs(goal-ai->angle);
+	ai->angle+=ai->RollSpeed*(goal>=ai->angle?1:-1)*(delta<=Pi?1:-1);
+	if (ai->angle>=2*Pi) ai->angle-=2*Pi;
+	if (ai->angle<0) ai->angle+=2*Pi;
 }
 
 int aiFireSeeing(tankClass *ai)
 {
+	const double fireScope=Pi/12;
 	double dangle;
 	dangle=ai->angle-getAngle(ai->x,ai->y,allTank[1].x,allTank[1].y);
 	if (dangle<=fireScope&&dangle>=-fireScope){
@@ -109,7 +115,8 @@ int aiFire(tankClass *ai) {
 	ai->fireCD=MAXCD;
 }
 
-void aiControl1(int id){
+void aiControl1(int id) //正方形路线+自动射击
+{
 	tankClass *ai=&allTank[id];
 	tankClass tank1,tank2;
 	int dx0,dy0;
@@ -132,27 +139,30 @@ void aiControl1(int id){
 	tank2.x+=tank2.speed*tank2.dx;
 	tank2.y+=tank2.speed*tank2.dy;
 	changeTank(tank1,tank2);
+	aiTubeTurnTo(allTank+id,getAngle(tank2.x,tank2.y,allTank[1].x,allTank[1].y));
 	if (tank2.fireCD) return;
 	aiFire(allTank+id);
 }
 
-void aiControl2(int id)  //遇到障碍物就掉头
+void aiControl2(int id)  //遇到障碍物就掉头+见人就射击
 {
 	tankClass tank1,tank2,*ai=allTank+id;
 	tank1=tank2=allTank[id];
 	aiForward(&tank2);
-	/*if (changeTank(tank1,tank2)==0) {
+	if (changeTank(tank1,tank2)==0) {
 		tank1=tank2=allTank[id];
 		aiTurnRight(&tank2,2);
 		changeTank(tank1,tank2);
 	}
-	*/aiTubeRoll(ai);
+	
+	//aiTubeRoll(ai);
+	aiTubeTurnTo(ai,getAngle(allTank[id].x,allTank[id].y,allTank[1].x,allTank[1].y));
 	aiFireSeeing(ai);
 	//if (!myRand(100)) aiFire(allTank+id);
 }
 
 
-void ai3(int id) //遇到障碍就右转
+void ai3(int id) //遇到障碍就右转+自动射击
 {
 	tankClass tank1,tank2;
 	tank1=tank2=allTank[id];
@@ -166,3 +176,6 @@ void ai3(int id) //遇到障碍就右转
 	aiFire(allTank+id);
 }
 
+//void ai4(int id) //完全随机行走
+//{
+//

@@ -8,9 +8,10 @@
 #include <string.h>
 #include "winmode.h"
 #include "ai.h"
-
+#include<stdio.h>
 nodeClass map[WINX+1][WINY+1];
 int counter=0;
+int destroyCounter=0;
 
 int dx[]={-1,0,1,0};
 int dy[]={0,-1,0,1};
@@ -48,7 +49,41 @@ void printLaser(int i)
 	if (allLaser[i].pflag) return;
 	allLaser[i].pflag=1;
 	beginPaint();
+	switch(allLaser[i].tankID) {
+	case 1:
+		setPenColor(RED);
+		break;
+	default:
+		setPenColor(BLUE);
+	}
+	setPenWidth(3);
 	line(allLaser[i].x0,allLaser[i].y0,allLaser[i].x0+allLaser[i].len*allLaser[i].xt,allLaser[i].y0+allLaser[i].len*allLaser[i].yt);
+	setPenColor(BLACK);
+	setPenWidth(1);
+	endPaint();
+}
+
+void printCounter() {
+	char s[255];
+	beginPaint();
+	setTextBkColor(EMPTY);
+	setTextFont("Î¢ÈíÑÅºÚ");
+	setTextSize(20);
+	setTextColor(BLACK);
+	sprintf(s,"Game Time %d",counter);
+	paintText(20,20,s);
+	endPaint();
+}
+
+void printKill() {
+	char s[255];
+	beginPaint();
+	setTextBkColor(EMPTY);
+	setTextFont("Î¢ÈíÑÅºÚ");
+	setTextSize(20);
+	setTextColor(BLACK);
+	sprintf(s,"You have killed %d enem%s",destroyCounter,destroyCounter>1?"ies":"y");
+	paintText(600,20,s);
 	endPaint();
 }
 
@@ -72,7 +107,7 @@ void printMap(int tid)
 	}
 #endif
 	endPaint();
-	watch("Map Timer -->",counter);
+	//watch("Map Timer -->",counter);
 	printWall();
 	for(i=0;i<WINX;i++)
 	{
@@ -87,7 +122,12 @@ void printMap(int tid)
 			}
 		}
 	}
+	for(i=1;i<=tankCount;i++){
+		printCDBar(allTank[i]);
+	}
 	counter++;
+	printCounter();
+	printKill();
 	if (counter==MAXEXISTTIME*1000) 
 	{
 		cancelTimer(0);

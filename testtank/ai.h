@@ -10,7 +10,7 @@ enum {
 } AItype;
 
 int initAI();
-void addAI();
+int addAI(int x,int y,void (*ctrl) (int));
 int myRand(int x);
 /*================= Basic AI Action ==================*/
 
