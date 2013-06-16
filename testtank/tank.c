@@ -145,13 +145,6 @@ int printCDBar(tankClass tank) {
 	delta=(128-abs(128-color))/2;
 	beginPaint();
 	setBrushColor(RGB(255-color+delta,color+delta,0));
-	//if (percent>0.9)
-	//	setBrushColor(GREEN);
-	//else if (percent>0.4)
-	//	setBrushColor(YELLOW);
-	//else 
-	//	setBrushColor(RED)
-	//setBrushStyle(BRUSH_STYLE_VERTICAL);
 	rectangle(barX-barWidth/2,barY-barHeight/2,barX-barWidth/2+width,barY+barHeight/2);
 	endPaint();
 }

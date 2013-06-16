@@ -2,7 +2,7 @@
 #define LASER_H
 
 #define MAXLASER 1000
-#define LASERLEN 20
+#define LASERLEN 50
 #define LASERLIFE 50
 #define LASERSPEED 15
 

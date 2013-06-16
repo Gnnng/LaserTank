@@ -9,6 +9,7 @@
 #include "winmode.h"
 #include "ai.h"
 #include<stdio.h>
+
 nodeClass map[WINX+1][WINY+1];
 int counter=0;
 int destroyCounter=0;
@@ -18,6 +19,9 @@ int dy[]={0,-1,0,1};
 
 int wallx[]={600,600,750,750};
 int wally[]={100,500,500,100};
+
+ACL_Sound laserFire;
+ACL_Sound laserReflect,tankMove,hit;
 
 void printTank(nodeClass *node)
 {
@@ -38,7 +42,7 @@ void printTank(nodeClass *node)
 	setBrushColor(EMPTY);
 	rectangle(leftx,lefty,rightx,righty);
 	ellipse(tank->x-tank->radius,tank->y-tank->radius,tank->x+tank->radius,tank->y+tank->radius);
-	setPenWidth(3);
+	setPenWidth(2);
 	line(tank->x,tank->y,tank->x+(int)(tank->len*cos(tank->angle)),tank->y+(int)(tank->len*sin(tank->angle)));
 	setPenWidth(1);
 	endPaint();
@@ -162,20 +166,21 @@ void printWall(){
 void initMap()
 {
 	int i,j;
+	//clear map
 	memset(map,0,sizeof(map));
+	//set sound
+
+	//set WALL
 	for (i=0;i<=WINX;i++)
 	{
 		map[i][1].obj=WALL;
 		map[i][WINY-1].obj=WALL;
 	}
-	//setWall(0,400,WINX/2,400);
-	//setWall(WINX/2,400,WINX/2,100);
 	for (j=0;j<=WINY;j++)
 	{
 		map[1][j].obj=WALL;
 		map[WINX-1][j].obj=WALL;
 	}
-
 	setLongWall(4,wallx,wally);
 	tankCount=0;
 	laserCount=0;

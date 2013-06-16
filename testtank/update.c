@@ -173,9 +173,11 @@ void LeftClickwhenFighting()
 	int x0,y0;
 	double len;
 	int x,y;
+
 	if (allTank[1].fireCD) {
 		return ;
 	}
+	playSound(laserFire,0);
 	x=mousex;
 	y=mousey;
 	x0=allTank[1].x;
@@ -195,7 +197,7 @@ void LeftClickwhenFighting()
 void updateKey(int key,int event)
 {
 	tankClass tank1,tank2;
-
+	static int soundFlag;
 	tank1=tank2=allTank[1];
 	watch("Key ->",key);
 	switch(key)
@@ -212,12 +214,16 @@ void updateKey(int key,int event)
 		tank2.dy=dy[key-LEFT];
 		tank2.x+=tank2.speed*tank2.dx;
 		tank2.y+=tank2.speed*tank2.dy;
-		watch("tank x ->",tank2.x);
-		watch("tank y ->",tank2.y);
+		if (!soundFlag) {
+			//playSound(tankMove,1);
+			soundFlag=1;
+		}
 		//tank2.action=1;
 		break;
 	case KEY_UP:
 		//tank2.action=0;
+		//stopSound(tankMove);
+		soundFlag=0;
 		break;
 	}
 	changeTank(tank1,tank2);

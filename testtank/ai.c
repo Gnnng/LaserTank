@@ -29,6 +29,7 @@ int addAI(int x,int y,void (*ctrl) (int))
 	aitank->tubeLock=1;
 	aitank->RollSpeed=Pi/180;
 	aitank->move=50;
+	aitank->fireCD=myRand(MAXCD);
 	insertTank(*aitank);
 	aitank->ctrl=ctrl;
 	return i;
@@ -88,6 +89,7 @@ int aiFireSeeing(tankClass *ai)
 }
 
 int aiForward(tankClass *ai){
+	//playSound(tankMove,0);
 	ai->x+=ai->speed*ai->dx;
 	ai->y+=ai->speed*ai->dy;
 	return 0;
@@ -112,6 +114,7 @@ int aiFire(tankClass *ai) {
 	watch("ai tubelock",ai->tubeLock);
 	insertLaser(allLaser[laserCount]);
 	allLaser[laserCount].tankID=ai->id;
+	//playSound(laserFire,0);
 	ai->fireCD=MAXCD;
 }
 

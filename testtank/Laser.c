@@ -91,6 +91,7 @@ void insertLaser(laserClass	laser)
 				if (map[x][y].obj==WALL || ( laser.tankID>1 && map[x][y].obj==TANKBODY && map[x][y].id>1))
 				{
 					flag=1;
+					if (laser.tankID==1) playSound(laserReflect,0);
 					cancelLaser(laser);
 					laser.span=laser.life;
 					laser.x0=x;laser.y0=y;

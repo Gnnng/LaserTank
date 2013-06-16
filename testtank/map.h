@@ -5,6 +5,7 @@
 #define WINY 600
 #define MAXEXISTTIME 500
 #define Pi 3.14159265358979
+#include"acllib.h"
 
 typedef enum{
 	NOPE,
@@ -26,6 +27,10 @@ extern int counter;
 extern int dx[];
 extern int dy[];
 
+extern ACL_Sound laserFire;
+extern ACL_Sound laserReflect;
+extern ACL_Sound tankMove;
+extern ACL_Sound hit;
 //already done
 void printTank(nodeClass *);
 void printLaser(int i);
