@@ -19,6 +19,7 @@ typedef struct _tankClass{
 	char tubeLock;
 	int fireCD;
 	void (*ctrl) (int);
+	int living;
 } tankClass;
 
 extern tankClass allTank[MAXTANK];

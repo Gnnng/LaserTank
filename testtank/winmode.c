@@ -18,3 +18,15 @@ int wintime()
 	putImageScale(winpic,0,0,WINX,WINY);
 	endPaint();
 }
+int losetime()
+{
+	ACL_Image *losepic=(ACL_Image*)malloc(sizeof(ACL_Image));
+	over=1;
+	stage=2;
+	cancelTimer(0);
+	beginPaint();
+	clearDevice();
+	loadImage("img\\losepic.jpg",losepic);
+	putImageScale(losepic,0,0,WINX,WINY);
+	endPaint();
+}

@@ -143,6 +143,8 @@ void setWall(int fx,int fy,int tx,int ty){
 		for(;fy!=ty;fy<ty?fy++:fy--)
 			map[fx][fy].obj=WALL;
 	}
+	map[fx][ty].obj=WALL;
+	map[tx][fy].obj=WALL;
 	if (fy==ty) {
 		for(;fx!=tx;fx<tx?fx++:fx--)
 			map[fx][fy].obj=WALL;

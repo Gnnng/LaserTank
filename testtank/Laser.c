@@ -62,9 +62,10 @@ void initLaser(int x0,int y0,double xt,double yt,int speed,int span,int tankid)
 
 void insertLaser(laserClass	laser)
 {
-	int i;
+	int i,p;
 	double nxt,nyt;
 	int flag;
+	int winflag;
 	int tankcrash=0;
 	int x,y,fx,fy,tx,ty;
 	fx=laser.x0;fy=laser.y0;
@@ -130,7 +131,30 @@ void insertLaser(laserClass	laser)
 					if (map[x][y].obj==TANKBODY)
 					{
 						watch("winning laser from",laser.tankID);
-						wintime();
+						//cancelTank(allTank[map[x][y].id]);
+						//allTank[map[x][y].id].living=0;
+						if (map[x][y].id==1)
+						{
+							losetime();
+						}
+						else
+						{
+							allTank[map[x][y].id].living=0;
+							cancelTank(allTank[map[x][y].id]);
+							winflag=1;
+							for (p=2;p<=tankCount;p++)
+							{
+								if (allTank[p].living==1)
+								{
+									winflag=0;
+									break;
+								}
+							}
+							if (winflag)
+							{
+								wintime();
+							}
+						}
 						flag=1;
 						laser.life=0;
 						break;

@@ -165,6 +165,7 @@ void updateMouse(int x,int y,int button,int event)
 	{
 		watch("laser x ->",allLaser[map[x][y].id].x0);
 		watch("laser y ->",allLaser[map[x][y].id].y0);
+		watch("id->",map[x][y].id);
 	}
 }  
 

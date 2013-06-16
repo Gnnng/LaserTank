@@ -123,6 +123,10 @@ void aiControl1(int id) //正方形路线+自动射击
 	tankClass *ai=&allTank[id];
 	tankClass tank1,tank2;
 	int dx0,dy0;
+	if (ai->living==0)
+	{
+		return;
+	}
 	if (ai->move==0) {
 		ai->move=50;
 		/* version 1
@@ -150,6 +154,10 @@ void aiControl1(int id) //正方形路线+自动射击
 void aiControl2(int id)  //遇到障碍物就掉头+见人就射击
 {
 	tankClass tank1,tank2,*ai=allTank+id;
+	if (ai->living==0)
+	{
+		return;
+	}
 	tank1=tank2=allTank[id];
 	aiForward(&tank2);
 	if (changeTank(tank1,tank2)==0) {
@@ -168,6 +176,10 @@ void aiControl2(int id)  //遇到障碍物就掉头+见人就射击
 void ai3(int id) //遇到障碍就右转+自动射击
 {
 	tankClass tank1,tank2;
+	if (allTank[id].living==0)
+	{
+		return;
+	}
 	tank1=tank2=allTank[id];
 	aiForward(&tank2);
 	if (changeTank(tank1,tank2)==0) {
