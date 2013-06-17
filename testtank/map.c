@@ -20,12 +20,13 @@ int dy[]={0,-1,0,1};
 int wallx[]={600,600,750,750};
 int wally[]={100,500,500,100};
 
-ACL_Sound laserFire;
-ACL_Sound laserReflect,tankMove,hit;
+ACL_Sound laserFire,laserReflect,tankMove,hit;
+ACL_Image floorImg,imgTankV,imgTankH,imgAITankH,imgAITankV;
 
 void printTank(nodeClass *node)
 {
 	int leftx,lefty,rightx,righty;
+	ACL_Image *mainTank,*AITank;
 	tankClass *tank=&allTank[node->id];
 	if (tank->tubeLock==1)
 	{
@@ -40,8 +41,23 @@ void printTank(nodeClass *node)
 	righty=tank->y+tank->width/2;
 	beginPaint();
 	setBrushColor(EMPTY);
-	rectangle(leftx,lefty,rightx,righty);
-	ellipse(tank->x-tank->radius,tank->y-tank->radius,tank->x+tank->radius,tank->y+tank->radius);
+	//rectangle(leftx,lefty,rightx,righty);
+	//ellipse(tank->x-tank->radius,tank->y-tank->radius,tank->x+tank->radius,tank->y+tank->radius);
+	if (tank->dx) {
+		mainTank=&imgTankH;
+		AITank=&imgAITankH;
+	} else {
+		mainTank=&imgTankV;
+		AITank=&imgAITankV;
+	}
+	switch(tank->id) {
+	case 1:
+		putImageTransparent(mainTank,leftx,lefty,tank->width,tank->width,WHITE);
+		break;
+	default:
+		putImageTransparent(AITank,leftx,lefty,tank->width,tank->width,WHITE);
+		break;
+	}
 	setPenWidth(2);
 	line(tank->x,tank->y,tank->x+(int)(tank->len*cos(tank->angle)),tank->y+(int)(tank->len*sin(tank->angle)));
 	setPenWidth(1);
@@ -55,12 +71,12 @@ void printLaser(int i)
 	beginPaint();
 	switch(allLaser[i].tankID) {
 	case 1:
-		setPenColor(RED);
+		setPenColor(WHITE);
 		break;
 	default:
-		setPenColor(BLUE);
+		setPenColor(RGB(255,112,102));
 	}
-	setPenWidth(3);
+	setPenWidth(2);
 	line(allLaser[i].x0,allLaser[i].y0,allLaser[i].x0+allLaser[i].len*allLaser[i].xt,allLaser[i].y0+allLaser[i].len*allLaser[i].yt);
 	setPenColor(BLACK);
 	setPenWidth(1);
@@ -72,9 +88,9 @@ void printCounter() {
 	beginPaint();
 	setTextBkColor(EMPTY);
 	setTextFont("Î¢ÈíÑÅºÚ");
-	setTextSize(20);
-	setTextColor(BLACK);
-	sprintf(s,"Game Time %d",counter);
+	setTextSize(30);
+	setTextColor(WHITE);
+	sprintf(s,"Game Time %6d.%02d s",counter/100,counter%100);
 	paintText(20,20,s);
 	endPaint();
 }
@@ -84,10 +100,10 @@ void printKill() {
 	beginPaint();
 	setTextBkColor(EMPTY);
 	setTextFont("Î¢ÈíÑÅºÚ");
-	setTextSize(20);
-	setTextColor(BLACK);
+	setTextSize(30);
+	setTextColor(WHITE);
 	sprintf(s,"You have killed %d enem%s",destroyCounter,destroyCounter>1?"ies":"y");
-	paintText(600,20,s);
+	paintText(500,20,s);
 	endPaint();
 }
 
@@ -104,15 +120,18 @@ void printMap(int tid)
 	{
 #endif
 		//clearDevice();
-		setBrushColor(WHITE);
-		rectangle(0,0,WINX,WINY);
+		//setBrushColor(WHITE);
+		//rectangle(0,0,WINX,WINY);
+		putImage(&floorImg,0,0);
 #ifdef SHADOW
 		cc=0;
 	}
 #endif
 	endPaint();
+	printCounter();
+	printKill();
 	//watch("Map Timer -->",counter);
-	printWall();
+	//printWall();
 	for(i=0;i<WINX;i++)
 	{
 		for(j=0;j<WINY;j++)
@@ -130,8 +149,7 @@ void printMap(int tid)
 		if (allTank[i].living) printCDBar(allTank[i]);
 	}
 	counter++;
-	printCounter();
-	printKill();
+
 	if (counter==MAXEXISTTIME*1000) 
 	{
 		cancelTimer(0);
@@ -184,7 +202,7 @@ void initMap()
 		map[1][j].obj=WALL;
 		map[WINX-1][j].obj=WALL;
 	}
-	setLongWall(4,wallx,wally);
+	//setLongWall(4,wallx,wally);
 	tankCount=0;
 	laserCount=0;
 	//set MAN

@@ -87,6 +87,6 @@ void printButton(int id){
 
 void initMenu(){
 	menuback=(ACL_Image*)malloc(sizeof(ACL_Image));
-	loadImage("img\\menuback_f.jpg",menuback);
-	addButton(WINX/2,WINY/2+200,111,38,"START!!!!",0,PLAY,"img\\buttonup1.jpg","img\\buttondown1.jpg");
+	loadImage("img\\welcome.jpg",menuback);
+	addButton(WINX/2,WINY/2+150,111,38,"START!!!!",0,PLAY,"img\\buttonup1.jpg","img\\buttondown1.jpg");
 }

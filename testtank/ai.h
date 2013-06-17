@@ -24,4 +24,5 @@ void aiControl1(int id);
 void aiControl2(int id);
 void ai3(int id);
 void ai4(int id);
+void ai5(int id);
 #endif

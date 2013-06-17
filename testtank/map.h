@@ -32,6 +32,12 @@ extern ACL_Sound laserFire;
 extern ACL_Sound laserReflect;
 extern ACL_Sound tankMove;
 extern ACL_Sound hit;
+extern ACL_Image floorImg;
+extern ACL_Image imgTankV;
+extern ACL_Image imgTankH;
+extern ACL_Image imgAITankV;
+extern ACL_Image imgAITankH;
+
 //already done
 void printTank(nodeClass *);
 void printLaser(int i);

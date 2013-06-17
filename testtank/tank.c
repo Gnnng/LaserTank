@@ -130,7 +130,7 @@ int changeTank(tankClass tank1,tankClass tank2){
 
 int printCDBar(tankClass tank) {
 	int barWidth=tank.width+10;
-	int barHeight=5;
+	int barHeight=10;
 	int barRelHeight=10;
 	int width;
 	int barX,barY;

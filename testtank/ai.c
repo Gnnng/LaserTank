@@ -9,9 +9,9 @@
 
 int initAI()
 {
-	addAI(100,100,aiControl1);
-	addAI(300,300,aiControl2);
-	addAI(100,400,ai3);
+	addAI(100,100,ai5);
+	//addAI(300,300,ai4);
+	//addAI(100,400,ai3);
 }
 
 int addAI(int x,int y,void (*ctrl) (int))
@@ -85,7 +85,7 @@ int aiFireSeeing(tankClass *ai)
 		if (ai->fireCD) return;
 		aiFire(ai);
 	}
-	watch("getangle",getAngle(ai->x,ai->y,allTank[1].x,allTank[1].y)/Pi*180);
+	//watch("getangle",getAngle(ai->x,ai->y,allTank[1].x,allTank[1].y)/Pi*180);
 }
 
 int aiForward(tankClass *ai){
@@ -187,8 +187,10 @@ void ai3(int id) //遇到障碍就右转+自动射击
 		aiTurnRight(&tank2,1);
 		changeTank(tank1,tank2);
 	}
+
+	aiTubeTurnTo(allTank+id,getAngle(allTank[id].x,allTank[id].y,allTank[1].x,allTank[1].y));
 	if (allTank[id].fireCD) return;
-	aiFire(allTank+id);
+	if (myRand(10)) aiFire(allTank+id);
 }
 
 void killAI(int id)
@@ -216,4 +218,29 @@ void ai4(int id)
 		aiTurnRight(&tank2,myRand(4));
 		changeTank(tank1,tank2);
 	}
+	aiTubeTurnTo(allTank+id,getAngle(allTank[id].x,allTank[id].y,allTank[1].x,allTank[1].y));
+	if (myRand(2)) aiFireSeeing(allTank+id);
 }
+
+void ai5(int id)
+{
+	tankClass tank1,tank2;
+	static int still;
+	tank1=tank2=allTank[id];
+	if (myRand(100)<90)     
+		aiForward(&tank2);
+	else 
+		aiTurnRight(&tank2,myRand(3));
+	if ((changeTank(tank1,tank2))==0) {
+		tank2=tank1;
+		aiTurnRight(&tank2,myRand(4));
+		changeTank(tank1,tank2);
+	}
+	if (myRand(100)<70) {
+		aiTubeRoll(allTank+id);
+	}else {
+		aiTubeTurnTo(allTank+id,getAngle(allTank[id].x,allTank[id].y,allTank[1].x,allTank[1].y));
+	}
+	if (myRand(4)) aiFireSeeing(allTank+id);
+}
+
