@@ -5,6 +5,7 @@
 #include <math.h>
 #include "map.h"
 #include "watch.h"
+#include "ai.h"
 laserClass allLaser[MAXLASER];
 int laserCount;
 
@@ -139,7 +140,9 @@ void insertLaser(laserClass	laser)
 						}
 						else
 						{
-							allTank[map[x][y].id].living=0;
+							//allTank[map[x][y].id].living=0;
+							killAI(map[x][y].id);
+							destroyCounter++;
 							cancelTank(allTank[map[x][y].id]);
 							winflag=1;
 							for (p=2;p<=tankCount;p++)

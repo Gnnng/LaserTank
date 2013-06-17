@@ -127,7 +127,7 @@ void printMap(int tid)
 		}
 	}
 	for(i=1;i<=tankCount;i++){
-		printCDBar(allTank[i]);
+		if (allTank[i].living) printCDBar(allTank[i]);
 	}
 	counter++;
 	printCounter();
@@ -170,6 +170,7 @@ void initMap()
 	int i,j;
 	//clear map
 	memset(map,0,sizeof(map));
+	counter=destroyCounter=0;
 	//set sound
 
 	//set WALL

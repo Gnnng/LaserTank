@@ -29,7 +29,7 @@ int addAI(int x,int y,void (*ctrl) (int))
 	aitank->tubeLock=1;
 	aitank->RollSpeed=Pi/180;
 	aitank->move=50;
-	aitank->fireCD=myRand(MAXCD);
+	aitank->fireCD=MAXCD;
 	insertTank(*aitank);
 	aitank->ctrl=ctrl;
 	return i;
@@ -123,10 +123,10 @@ void aiControl1(int id) //正方形路线+自动射击
 	tankClass *ai=&allTank[id];
 	tankClass tank1,tank2;
 	int dx0,dy0;
-	if (ai->living==0)
-	{
-		return;
-	}
+	//if (ai->living==0)
+	//{
+	//	return;
+	//}
 	if (ai->move==0) {
 		ai->move=50;
 		/* version 1
@@ -154,10 +154,10 @@ void aiControl1(int id) //正方形路线+自动射击
 void aiControl2(int id)  //遇到障碍物就掉头+见人就射击
 {
 	tankClass tank1,tank2,*ai=allTank+id;
-	if (ai->living==0)
-	{
-		return;
-	}
+	//if (ai->living==0)
+	//{
+	//	return;
+	//}
 	tank1=tank2=allTank[id];
 	aiForward(&tank2);
 	if (changeTank(tank1,tank2)==0) {
@@ -176,10 +176,10 @@ void aiControl2(int id)  //遇到障碍物就掉头+见人就射击
 void ai3(int id) //遇到障碍就右转+自动射击
 {
 	tankClass tank1,tank2;
-	if (allTank[id].living==0)
-	{
-		return;
-	}
+	//if (allTank[id].living==0)
+	//{
+	//	return;
+	//}
 	tank1=tank2=allTank[id];
 	aiForward(&tank2);
 	if (changeTank(tank1,tank2)==0) {
@@ -191,6 +191,29 @@ void ai3(int id) //遇到障碍就右转+自动射击
 	aiFire(allTank+id);
 }
 
-//void ai4(int id) //完全随机行走
-//{
-//
+void killAI(int id)
+{
+	allTank[id].living=0;
+	allTank[id].ctrl=aiDead;
+}
+
+void aiDead(int id)
+{
+	//do nothing
+}
+
+void ai4(int id)
+{
+	tankClass tank1,tank2;
+	static int still;
+	tank1=tank2=allTank[id];
+	if (myRand(100)<95)     
+		aiForward(&tank2);
+	else 
+		aiTurnRight(&tank2,myRand(4));
+	if ((changeTank(tank1,tank2))==0) {
+		tank2=tank1;
+		aiTurnRight(&tank2,myRand(4));
+		changeTank(tank1,tank2);
+	}
+}

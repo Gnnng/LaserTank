@@ -1,11 +1,11 @@
 #ifndef PRINT_H
 #define PRINT_H
+#include"acllib.h"
 
 #define WINX 800
 #define WINY 600
 #define MAXEXISTTIME 500
 #define Pi 3.14159265358979
-#include"acllib.h"
 
 typedef enum{
 	NOPE,
@@ -24,6 +24,7 @@ typedef struct _nodeClass{
 
 extern nodeClass map[WINX+1][WINY+1];
 extern int counter;
+extern int destroyCounter;
 extern int dx[];
 extern int dy[];
 
