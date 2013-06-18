@@ -32,4 +32,6 @@ void changeLaser(laserClass,laserClass);
 
 void updateLaser();
 
+void reflection (laserClass*,int,int);
+
 #endif
