@@ -22,7 +22,14 @@ int wally[]={100,500,500,100};
 
 ACL_Sound laserFire,laserReflect,tankMove,hit;
 ACL_Image floorImg,imgTankV,imgTankH,imgAITankH,imgAITankV;
-
+ACL_Image imgTank0;
+ACL_Image imgTank1;
+ACL_Image imgTank2;
+ACL_Image imgTank3;
+ACL_Image imgAITank0;
+ACL_Image imgAITank1;
+ACL_Image imgAITank2;
+ACL_Image imgAITank3;
 void printTank(nodeClass *node)
 {
 	int leftx,lefty,rightx,righty;
@@ -43,12 +50,25 @@ void printTank(nodeClass *node)
 	setBrushColor(EMPTY);
 	//rectangle(leftx,lefty,rightx,righty);
 	//ellipse(tank->x-tank->radius,tank->y-tank->radius,tank->x+tank->radius,tank->y+tank->radius);
-	if (tank->dx) {
-		mainTank=&imgTankH;
-		AITank=&imgAITankH;
-	} else {
-		mainTank=&imgTankV;
-		AITank=&imgAITankV;
+	switch(tank->dy) {
+	case -1:
+		mainTank=&imgTank0;
+		AITank=&imgAITank0;
+		break;
+	case 1:
+		mainTank=&imgTank2;
+		AITank=&imgAITank2;
+		break;
+	}
+	switch(tank->dx) {
+	case -1:
+		mainTank=&imgTank3;
+		AITank=&imgAITank3;
+		break;
+	case 1:
+		mainTank=&imgTank1;
+		AITank=&imgAITank1;
+		break;
 	}
 	switch(tank->id) {
 	case 1:

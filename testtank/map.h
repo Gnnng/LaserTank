@@ -37,6 +37,16 @@ extern ACL_Image imgTankV;
 extern ACL_Image imgTankH;
 extern ACL_Image imgAITankV;
 extern ACL_Image imgAITankH;
+extern ACL_Image imgTank0;
+extern ACL_Image imgTank1;
+extern ACL_Image imgTank2;
+extern ACL_Image imgTank3;
+extern ACL_Image imgAITank0;
+extern ACL_Image imgAITank1;
+extern ACL_Image imgAITank2;
+extern ACL_Image imgAITank3;
+
+
 
 //already done
 void printTank(nodeClass *);

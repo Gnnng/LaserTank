@@ -10,7 +10,7 @@
 int initAI()
 {
 	addAI(100,100,ai5);
-	//addAI(300,300,ai4);
+	addAI(300,300,ai4);
 	//addAI(100,400,ai3);
 }
 
