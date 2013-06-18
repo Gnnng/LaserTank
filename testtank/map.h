@@ -6,7 +6,7 @@
 #define WINY 600
 #define MAXEXISTTIME 500
 #define Pi 3.14159265358979
-#define LEVELNUM 2
+#define LEVELNUM 5
 
 typedef enum{
 	NOPE,

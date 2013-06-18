@@ -136,7 +136,7 @@ int aiFire(tankClass *ai) {
 	watch("ai tubelock",ai->tubeLock);
 	insertLaser(allLaser[laserCount]);
 	allLaser[laserCount].tankID=ai->id;
-	//playSound(laserFire,0);
+	playSound(laserFire,0);
 	ai->fireCD=MAXCD;
 }
 
