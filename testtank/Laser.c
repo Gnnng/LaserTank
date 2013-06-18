@@ -112,7 +112,7 @@ void insertLaser(laserClass	laser)
 					flag=1;
 					break;
 				}
-				if (map[x][y].obj==WALL || ( laser.tankID>1 && map[x][y].obj==TANKBODY && map[x][y].id>1))
+				if (map[x][y].obj==WALL || ( laser.tankID>1 && map[x][y].obj==TANKBODY && map[x][y].id>=1))
 				{
 					flag=1;
 					if (laser.tankID==1) playSound(laserReflect,0);
@@ -331,7 +331,7 @@ void reflection(laserClass *laser,int x,int y)
 	else
 	if (map[x][y+(int)(laser->yt/fabs(laser->yt))].obj==ob)
 	{
-		laser->xt=-laser->yt;
+		laser->xt=-laser->xt;
 	}
 	laser->ox=laser->ox+(laser->xt)/fabs(laser->xt);
 	laser->oy=laser->oy+(laser->yt)/fabs(laser->yt);
