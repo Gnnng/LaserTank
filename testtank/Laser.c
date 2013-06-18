@@ -67,6 +67,7 @@ void insertLaser(laserClass	laser)
 	double nxt,nyt;
 	int flag;
 	int winflag;
+	int dx,dy;
 	int tankcrash=0;
 	int x,y,fx,fy,tx,ty;
 	fx=laser.x0;fy=laser.y0;
@@ -75,8 +76,8 @@ void insertLaser(laserClass	laser)
 	{
 		tx=laser.x0+i*laser.xt;//bug
 		ty=laser.y0+i*laser.yt;//bug
-		if (tx>fx) tx++; else tx--;
-		if (ty>fy) ty++; else ty--;
+		if (tx>fx) tx++; else if (tx<fx) tx--;
+		if (ty>fy) ty++; else if (ty<fy) ty--;
 		flag=0;
 		for (x=fx;x!=tx;)
 		{
@@ -98,7 +99,7 @@ void insertLaser(laserClass	laser)
 					laser.span=laser.life;
 					laser.x0=x;laser.y0=y;
 					laser.ox=x;laser.oy=y;
-					if (map[x][y].obj==WALL && (map[x+1][y].obj==WALL || map[x-1][y].obj==WALL) || map[x][y].obj==TANKBODY && (map[x+1][y].obj==TANKBODY && map[x-1][y].obj==TANKBODY))
+					if ((map[x][y].obj==WALL && (map[x+1][y].obj==WALL || map[x-1][y].obj==WALL)) || map[x][y].obj==TANKBODY && (map[x+1][y].obj==TANKBODY && map[x-1][y].obj==TANKBODY))
 					{
 						laser.yt=-laser.yt;
 					}
@@ -106,7 +107,7 @@ void insertLaser(laserClass	laser)
 					{
 						nyt=laser.yt;
 					}
-					if (map[x][y].obj==WALL && (map[x][y+1].obj==WALL || map[x][y-1].obj==WALL) || map[x][y].obj==TANKBODY && (map[x][y+1].obj==TANKBODY && map[x-1][y-1].obj==TANKBODY))
+					if (map[x][y].obj==WALL && (map[x][y+1].obj==WALL || map[x][y-1].obj==WALL) || map[x][y].obj==TANKBODY && (map[x][y+1].obj==TANKBODY && map[x][y-1].obj==TANKBODY))
 					{
 						laser.xt=-laser.xt;
 					}
@@ -114,6 +115,10 @@ void insertLaser(laserClass	laser)
 					{
 						nxt=-laser.xt;
 					}
+					laser.ox=laser.ox+(laser.xt)/fabs(laser.xt);
+					laser.oy=laser.oy+(laser.yt)/fabs(laser.yt);
+					laser.x0=laser.ox;
+					laser.y0=laser.oy;
 					/*laserCount++;
 					allLaser[laserCount]=laser;
 					allLaser[laserCount].xt=nxt;
@@ -165,13 +170,13 @@ void insertLaser(laserClass	laser)
 					map[x][y].obj=LASER;
 					map[x][y].id=laser.id;
 				}
-				if (ty>fy) y++; else y--;
+				if (ty>fy) y++; else if (ty<fy) y--;
 			}
 			if (flag)
 			{
 				break;
 			}
-			if (tx>fx) x++; else x--;
+			if (tx>fx) x++; else if (tx<fx) x--;
 		}
 		if (flag)
 		{
@@ -192,8 +197,8 @@ void cancelLaser(laserClass laser)
 	{
 		tx=laser.x0+i*laser.xt;//bug
 		ty=laser.y0+i*laser.yt;//bug
-		if (tx>fx) tx++; else tx--;
-		if (ty>fy) ty++; else ty--;
+		if (tx>fx) tx++; else if (tx<fx) tx--;
+		if (ty>fy) ty++; else if (ty<fy) ty--;
 		flag=0;
 		for (x=fx;x!=tx;)
 		{
