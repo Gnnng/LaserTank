@@ -46,8 +46,6 @@ extern ACL_Image imgAITank1;
 extern ACL_Image imgAITank2;
 extern ACL_Image imgAITank3;
 
-
-
 //already done
 void printTank(nodeClass *);
 void printLaser(int i);
@@ -57,5 +55,5 @@ void setWall(int fx,int fy,int tx,int ty);
 void setLongWall(int n,int *xset,int *yset);
 //remaing build
 //remaing remove
-void initMap();
+void initMap(int level);
 #endif

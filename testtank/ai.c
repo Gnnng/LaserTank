@@ -7,11 +7,18 @@
 #include <stdlib.h>
 #include <time.h>
 
-int initAI()
+int initAI(int level)
 {
-	addAI(100,100,ai5);
-	addAI(300,300,ai4);
-	//addAI(100,400,ai3);
+	switch(level){
+	case 1:
+		addAI(100,100,ai3);
+		break;
+	case 2:
+		addAI(100,400,ai5);
+		break;
+	default:
+		break;
+	}
 }
 
 int addAI(int x,int y,void (*ctrl) (int))

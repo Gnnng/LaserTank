@@ -8,7 +8,7 @@
 #include <string.h>
 #include "winmode.h"
 #include "ai.h"
-#include<stdio.h>
+#include <stdio.h>
 
 nodeClass map[WINX+1][WINY+1];
 int counter=0;
@@ -196,21 +196,22 @@ void setLongWall(int n,int* xset,int *yset){
 }
 
 void printWall(){
-	int i;
+	int i,j;
 	beginPaint();
-	for(i=0;i<3;i++)
-		line(*(wallx+i),*(wally+i),*(wallx+i+1),*(wally+i+1));
+	for(i=0;i<WINX;i++)
+		for(j=0;j<WINY;j++)
+			if (map[i][j].obj==WALL) putPixel(i,j,YELLOW);
 	endPaint();
 }
 
-void initMap()
+void initMap(int level)
 {
 	int i,j;
 	//clear map
 	memset(map,0,sizeof(map));
 	counter=destroyCounter=0;
-	//set sound
-
+	tankCount=0;
+	laserCount=0;
 	//set WALL
 	for (i=0;i<=WINX;i++)
 	{
@@ -222,13 +223,20 @@ void initMap()
 		map[1][j].obj=WALL;
 		map[WINX-1][j].obj=WALL;
 	}
-	setLongWall(4,wallx,wally);
-	tankCount=0;
-	laserCount=0;
+	//set inside wall
+	switch(level) {
+	case 1:
+		break;
+	case 2:
+		setLongWall(4,wallx,wally);
+		break;
+	default:
+		break;
+	}
 	//set MAN
 	initTank(tankCount++);
 	insertTank(allTank[1]);
 	allTank[1].tubeLock=0;
 	//set AI
-	initAI();
+	initAI(level);
 }

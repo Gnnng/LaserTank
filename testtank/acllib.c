@@ -510,7 +510,7 @@ void paintText(int x, int y, const char *textstring)
 	TextOutA(g_hmemdc, x, y, textstring, strlen(textstring));
 }
 
-void putpixel(int x, int y, ACL_Color color)
+void putPixel(int x, int y, ACL_Color color)
 {
 	ACL_ASSERT_BEGIN_PAINT;
 	SetPixel(g_hmemdc, x, y, color);	

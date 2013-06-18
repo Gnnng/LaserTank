@@ -9,7 +9,7 @@ enum {
 	BASIC
 } AItype;
 
-int initAI();
+int initAI(int level);
 int addAI(int x,int y,void (*ctrl) (int));
 void killAI(int id);
 int myRand(int x);
