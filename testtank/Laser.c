@@ -160,7 +160,17 @@ void insertLaser(laserClass	laser)
 							}
 							if (winflag)
 							{
-								wintime();
+								if (level<LEVELNUM)
+								{
+									level++;
+									initMap(level);
+									cancelTimer(0);
+									startTimer(0,10);
+								}
+								else
+								{
+									wintime();
+								}
 							}
 						}
 						flag=1;

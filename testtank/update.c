@@ -91,7 +91,8 @@ void updateTimer(int tid){
 		{
 			cancelTimer(2);
 			startTimer(0,10);
-			initMap(2);
+			level=1;
+			initMap(1);
 			cou=0;
 			for(i=0;i<=buttonCount;i++)
 			{

@@ -27,6 +27,7 @@ extern int counter;
 extern int destroyCounter;
 extern int dx[];
 extern int dy[];
+extern int level;
 
 extern ACL_Sound laserFire;
 extern ACL_Sound laserReflect;

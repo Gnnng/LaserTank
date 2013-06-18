@@ -19,6 +19,7 @@ int dy[]={0,-1,0,1};
 
 int wallx[]={600,600,750,750};
 int wally[]={100,500,500,100};
+int level;
 
 ACL_Sound laserFire,laserReflect,tankMove,hit;
 ACL_Image floorImg,imgTankV,imgTankH,imgAITankH,imgAITankV;
