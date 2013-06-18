@@ -14,7 +14,7 @@ int wintime()
 	cancelTimer(0);
 	beginPaint();
 	clearDevice();
-	loadImage("img\\winpic.jpg",winpic);
+	loadImage("img\\winpic.bmp",winpic);
 	putImageScale(winpic,0,0,WINX,WINY);
 	endPaint();
 }

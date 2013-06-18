@@ -13,7 +13,7 @@ int Main()
 	loadSound("sound\\reflect1.wav",&laserReflect);
 	loadSound("sound\\tankmove2.wav",&tankMove);
 	//load the image
-	loadImage("img\\floor.bmp",&floorImg);
+	loadImage("img\\map.jpg",&floorImg);
 	loadImage("img\\tank20.gif",&imgTank0);
 	loadImage("img\\tank21.gif",&imgTank1);
 	loadImage("img\\tank22.gif",&imgTank2);

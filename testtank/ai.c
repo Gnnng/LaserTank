@@ -16,6 +16,21 @@ int initAI(int level)
 	case 2:
 		addAI(100,400,ai5);
 		break;
+	case 3:
+		addAI(300,200,ai4);
+		addAI(100,50,aiControl2);
+		break;
+	case 4:
+		addAI(500,400,ai5);
+		addAI(600,200,ai4);
+		addAI(100,50,aiControl2);
+		break;
+	case 5:
+		addAI(100,200,ai5);
+		addAI(200,300,ai5);
+		addAI(100,400,aiControl1);
+		addAI(200,100,ai3);
+		break;
 	default:
 		break;
 	}
@@ -243,7 +258,7 @@ void ai5(int id)
 		aiTurnRight(&tank2,myRand(4));
 		changeTank(tank1,tank2);
 	}
-	if (myRand(100)<70) {
+	if (myRand(100)<30) {
 		aiTubeRoll(allTank+id);
 	}else {
 		aiTubeTurnTo(allTank+id,getAngle(allTank[id].x,allTank[id].y,allTank[1].x,allTank[1].y));

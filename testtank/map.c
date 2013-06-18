@@ -49,8 +49,6 @@ void printTank(nodeClass *node)
 	righty=tank->y+tank->width/2;
 	beginPaint();
 	setBrushColor(EMPTY);
-	//rectangle(leftx,lefty,rightx,righty);
-	//ellipse(tank->x-tank->radius,tank->y-tank->radius,tank->x+tank->radius,tank->y+tank->radius);
 	switch(tank->dy) {
 	case -1:
 		mainTank=&imgTank0;
@@ -95,7 +93,7 @@ void printLaser(int i)
 		setPenColor(WHITE);
 		break;
 	default:
-		setPenColor(RGB(255,112,102));
+		setPenColor(RGB(200,0,0));
 	}
 	setPenWidth(2);
 	line(allLaser[i].x0,allLaser[i].y0,allLaser[i].x0+allLaser[i].len*allLaser[i].xt,allLaser[i].y0+allLaser[i].len*allLaser[i].yt);
@@ -128,6 +126,17 @@ void printKill() {
 	endPaint();
 }
 
+void printLevel() {
+	char s[255];
+	beginPaint();
+	setTextBkColor(EMPTY);
+	setTextFont("Î¢ÈíÑÅºÚ");
+	setTextSize(30);
+	setTextColor(WHITE);
+	sprintf(s,"Level %2d",level);
+	paintText(350,20,s);
+	endPaint();
+}
 void printMap(int tid)
 {
 	int i,j;
@@ -151,6 +160,7 @@ void printMap(int tid)
 	endPaint();
 	printCounter();
 	printKill();
+	printLevel();
 	//watch("Map Timer -->",counter);
 	printWall();
 	for(i=0;i<WINX;i++)
@@ -198,10 +208,15 @@ void setLongWall(int n,int* xset,int *yset){
 
 void printWall(){
 	int i,j;
+	int ii,jj;
+	int size=1;
 	beginPaint();
 	for(i=0;i<WINX;i++)
 		for(j=0;j<WINY;j++)
-			if (map[i][j].obj==WALL) putPixel(i,j,YELLOW);
+			if (map[i][j].obj==WALL) 
+				/*for(ii=i-size;ii<=i+size;ii++)
+					for(jj=j-size;jj<=j+size;jj++)*/
+						putPixel(i,j,BLACK);
 	endPaint();
 }
 
@@ -210,7 +225,7 @@ void initMap(int level)
 	int i,j;
 	//clear map
 	memset(map,0,sizeof(map));
-	counter=destroyCounter=0;
+	if (level==1) counter=destroyCounter=0;
 	tankCount=0;
 	laserCount=0;
 	//set WALL
@@ -230,6 +245,12 @@ void initMap(int level)
 		break;
 	case 2:
 		setLongWall(4,wallx,wally);
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
 		break;
 	default:
 		break;

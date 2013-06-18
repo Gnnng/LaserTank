@@ -5,7 +5,7 @@
 #define LASERLEN 50
 #define LASERLIFE 50
 #define LASERSPEED 15
-#define LEVELNUM 2;
+#define LEVELNUM 5
 
 typedef struct _laserClass{
 	int ox,oy; //original coordinates
