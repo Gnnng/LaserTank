@@ -131,7 +131,7 @@ void printMap(int tid)
 	printCounter();
 	printKill();
 	//watch("Map Timer -->",counter);
-	//printWall();
+	printWall();
 	for(i=0;i<WINX;i++)
 	{
 		for(j=0;j<WINY;j++)
@@ -202,7 +202,7 @@ void initMap()
 		map[1][j].obj=WALL;
 		map[WINX-1][j].obj=WALL;
 	}
-	//setLongWall(4,wallx,wally);
+	setLongWall(4,wallx,wally);
 	tankCount=0;
 	laserCount=0;
 	//set MAN
