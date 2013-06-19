@@ -8,6 +8,7 @@
 #include "ai.h"
 laserClass allLaser[MAXLASER];
 int laserCount;
+int supermode;
 
 void updateLaser()
 {
@@ -112,7 +113,7 @@ void insertLaser(laserClass	laser)
 					flag=1;
 					break;
 				}
-				if (map[x][y].obj==WALL || ( laser.tankID>1 && map[x][y].obj==TANKBODY && map[x][y].id>=1))
+				if (map[x][y].obj==WALL || ( laser.tankID>1 && map[x][y].obj==TANKBODY && (map[x][y].id>1|| map[x][y].id==1 && supermode==1)))
 				{
 					flag=1;
 					//if (laser.tankID==1) 
@@ -120,7 +121,7 @@ void insertLaser(laserClass	laser)
 					cancelLaser(laser);
 					reflection(&laser,x,y);
 					/*if ((map[x][y].obj==WALL && (map[x+1][y].obj==WALL || map[x-1][y].obj==WALL)) || map[x][y].obj==TANKBODY && (map[x+1][y].obj==TANKBODY && map[x-1][y].obj==TANKBODY))
-					{
+					{ss
 						laser.yt=-laser.yt;
 					}
 					else

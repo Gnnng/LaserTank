@@ -81,6 +81,7 @@ void updateTimer(int tid){
 		break;
 	case 1:
 		stage=1;
+		keyTimer(tid);
 		menuTimer(tid);
 		break;
 	case 2:
@@ -130,11 +131,11 @@ void LeftClickinmenu()
 	{
 		switch(allButton[i].event)
 		{
-			case PLAY:
-				allButton[i].up=0;
-				cancelTimer(1);
-				startTimer(2,10);
-				break;
+		case PLAY:
+			allButton[i].up=0;
+			cancelTimer(1);
+			startTimer(2,10);
+			break;
 		}
 	}
 }
@@ -200,33 +201,93 @@ void updateKey(int key,int event)
 {
 	tankClass tank1,tank2;
 	static int soundFlag;
-	tank1=tank2=allTank[1];
-	watch("Key ->",key);
-	switch(key)
+	static int cheatcou=0;
+	//static int downflag=0;
+	if (stage==1)
 	{
-	case 87:key=UP;break;
-	case 65:key=LEFT;break;
-	case 83:key=DOWN;break;
-	case 68:key=RIGHT;break;
-	}
-	switch(event){
-	case KEY_DOWN:
-		//if(tank2.action==1) break;
-		tank2.dx=dx[key-LEFT];
-		tank2.dy=dy[key-LEFT];
-		tank2.x+=tank2.speed*tank2.dx;
-		tank2.y+=tank2.speed*tank2.dy;
-		if (!soundFlag) {
-			//playSound(tankMove,1);
-			soundFlag=1;
+		
+		if (event==KEY_UP)
+		{
+			if (key==UP)
+			if (cheatcou==0 ||cheatcou==1)
+			{
+				cheatcou++;
+				return;
+			}
+			else
+			{
+				cheatcou=0;
+				return;
+			}
+			if (key==DOWN)
+			if(cheatcou==2||cheatcou==3)
+			{
+				cheatcou++;
+				return;
+			}
+			else
+			{
+				cheatcou=0;
+				return;
+			}
+			if (key==LEFT)
+			if(cheatcou==4||cheatcou==6)
+			{
+				cheatcou++;
+				return;
+			}
+			else
+			{
+				cheatcou=0;
+				return;
+			}
+			if (key==RIGHT)
+			if (cheatcou==5 || cheatcou==7)
+			{
+				cheatcou++;
+				if (cheatcou==8)
+				{
+					supermode=1;
+				}
+				return;
+			}
+			else
+			{
+				cheatcou=0;
+				return;
+			}
 		}
-		//tank2.action=1;
-		break;
-	case KEY_UP:
-		//tank2.action=0;
-		//stopSound(tankMove);
-		soundFlag=0;
-		break;
 	}
-	changeTank(tank1,tank2);
+	if (stage==0)
+	{
+		tank1=tank2=allTank[1];
+		watch("Key ->",key);
+		switch(key)
+		{
+		case 87:key=UP;break;
+		case 65:key=LEFT;break;
+		case 83:key=DOWN;break;
+		case 68:key=RIGHT;break;
+		}
+		switch(event){
+		case KEY_DOWN:
+			//if(tank2.action==1) break;
+			tank2.dx=dx[key-LEFT];
+			tank2.dy=dy[key-LEFT];
+			tank2.x+=tank2.speed*tank2.dx;
+			tank2.y+=tank2.speed*tank2.dy;
+			if (!soundFlag) {
+				//playSound(tankMove,1);
+				soundFlag=1;
+			}
+			//tank2.action=1;
+			break;
+		case KEY_UP:
+			//tank2.action=0;
+			//stopSound(tankMove);
+			soundFlag=0;
+			break;
+		}
+		changeTank(tank1,tank2);
+	}	
 }

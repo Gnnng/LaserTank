@@ -25,6 +25,7 @@ int Main()
 	loadImage("img\\aitankv.gif",&imgAITankV);
 	loadImage("img\\aitankh.gif",&imgAITankH);
 	initMenu();
+	supermode=0;
 	registerTimerEvent(updateTimer);
 	//registerKeyboardEvent(updateKey);
 	registerMouseEvent(updateMouse);

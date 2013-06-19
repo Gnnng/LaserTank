@@ -20,6 +20,7 @@ typedef struct _laserClass{
 
 extern laserClass allLaser[];
 extern int laserCount;
+extern int supermode;
 
 void insertLaser(laserClass );
 
