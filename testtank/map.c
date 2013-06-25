@@ -216,7 +216,11 @@ void printWall(){
 			if (map[i][j].obj==WALL) 
 				/*for(ii=i-size;ii<=i+size;ii++)
 					for(jj=j-size;jj<=j+size;jj++)*/
-						putPixel(i,j,BLACK);
+			{
+						putPixel(i,j,WHITE);
+						//putPixel(i,j+1,GREEN);
+						//putPixel(i+1,j,GREEN);
+			}
 	endPaint();
 }
 
@@ -241,16 +245,25 @@ void initMap(int level)
 	}
 	//set inside wall
 	switch(level) {
-	case 1:
+	case 5:
 		break;
 	case 2:
-		setLongWall(4,wallx,wally);
+		//setLongWall(4,wallx,wally);
 		break;
 	case 3:
+		setWall(200,400,600,400);
 		break;
 	case 4:
+		//setLongWall(4,wallx,wally);
+		setWall(300,200,300,400);
+		setWall(300,400,500,400);
+		setWall(500,400,500,200);
 		break;
-	case 5:
+	case 1:
+		setWall(700,200,300,200);
+		setWall(300,200,300,400);
+		setWall(300,400,700,400);
+		//setWall(500,400,500,200);
 		break;
 	default:
 		break;
