@@ -10,7 +10,7 @@
 int initAI(int level)
 {
 	switch(level){
-	case 5:
+	case 1:
 		addAI(100,100,ai3);
 		break;
 	case 2:
@@ -25,7 +25,7 @@ int initAI(int level)
 		addAI(200,200,ai3);
 		addAI(700,500,aiControl2);
 		break;
-	case 1:
+	case 5:
 		addAI(100,200,ai5);
 		addAI(200,300,ai5);
 		addAI(100,400,aiControl1);

@@ -245,7 +245,7 @@ void initMap(int level)
 	}
 	//set inside wall
 	switch(level) {
-	case 5:
+	case 1:
 		break;
 	case 2:
 		//setLongWall(4,wallx,wally);
@@ -259,7 +259,7 @@ void initMap(int level)
 		setWall(300,400,500,400);
 		setWall(500,400,500,200);
 		break;
-	case 1:
+	case 5:
 		setWall(700,200,300,200);
 		setWall(300,200,300,400);
 		setWall(300,400,700,400);
